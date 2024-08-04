@@ -1,0 +1,1 @@
+export { constuctorService } from "@src/constuctor.module/constuctor.service"
