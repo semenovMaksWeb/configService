@@ -14,19 +14,23 @@ class ConvertService {
                 if (isNaN(value)) {
                     value = null;
                 }
+                break;
             }
             case TypeVarEnum.boolean: {
                 value = !!value;
+                break;
             }
             case TypeVarEnum.json: {
                 if (typeof value === "string") {
                     value = JSON.parse(value);
                 }
+                break;
             }
             case TypeVarEnum.array: {
                 if (!Array.isArray(value)) {
                     value = [value];
                 }
+                break;
             }
         }
         return value;
