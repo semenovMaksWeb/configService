@@ -18,11 +18,22 @@ class BdService {
     }
 
     public async sqlCall(commandSql: CommandSql) {
+
         // TODO Придумать как определять type СУБД
         const connection = storeConfigService.getElementStoreConfig(commandSql.sql.connection);
-        const paramsSql = storeConfigService.getStoreConfigArray(commandSql.sql.params);        
-        const sqlResult = await connection.query(commandSql.sql.query, paramsSql);        
-        return sqlResult.rows;
+        const paramsSql = storeConfigService.getStoreConfigArray(commandSql.sql.params);
+        const typeBd = storeConfigService.getElementStoreConfig(commandSql.sql.type);
+        let sqlResult = null;
+        switch (typeBd) {
+            case ConnectionBd.POSTGRE_SQL:
+                sqlResult = (await pgService.sqlCall(connection, commandSql.sql.query, paramsSql)).rows;
+                break;
+
+            case ConnectionBd.MYSQL:
+                sqlResult = await mySqlService.sqlCall(connection, commandSql.sql.query, paramsSql);            
+                break;
+        }
+        return sqlResult;
     }
 }
 

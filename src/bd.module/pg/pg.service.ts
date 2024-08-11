@@ -11,5 +11,9 @@ class PgService {
             host: bdConfigResult.host
         });
     }
+    
+    public async sqlCall(connection: Pool, sql: string, params: any[]) {
+        return await connection.query(sql, params);
+    }
 }
 export const pgService = new PgService();

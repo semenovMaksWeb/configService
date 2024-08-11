@@ -1,4 +1,4 @@
-import mysql from "mysql"
+import mysql, { Pool } from "mysql2"
 import { BdConfigResult } from "@src/bd.module/bd.config/bd.config.interface";
 
 class MySqlService {
@@ -10,6 +10,11 @@ class MySqlService {
             database: bdConfigResult.database,
             port: bdConfigResult.port
         })
+    }
+
+    public async sqlCall(connection: Pool, sql: string, params: any[]) {
+        const [result] = await connection.promise().query(sql, params);
+        return result
     }
 }
 export const mySqlService = new MySqlService();
