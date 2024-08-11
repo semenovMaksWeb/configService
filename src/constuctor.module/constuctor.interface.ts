@@ -17,6 +17,8 @@ export interface ConstuctorResult {
 export interface Constuctor {
     action: ConstuctorAction,
     result?: ConstuctorResult,
+    name: string;
+    comment: string | null
 }
 
 export interface ConstuctorConnectionDatabase extends Constuctor {
