@@ -9,3 +9,5 @@ export type StoreConfig = {
         type: TypeVarEnum
     }
 }
+
+export type StoreConfigElement = Omit<StoreConfig, "key">;

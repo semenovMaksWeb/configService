@@ -1,11 +1,11 @@
 import { CommandResultOperator } from "@src/constuctor.module/constuctor.interface";
 import { convertService } from "@src/libs.module/libs.module";
-import { StoreConfig } from "@src/store.module/store.config/store.config.interface";
+import { StoreConfig, StoreConfigElement } from "@src/store.module/store.config/store.config.interface";
 import { Store } from "@src/store.module/store.interface";
 import { storeService } from "@src/store.module/store.service";
 
 class StoreConfigService {
-    public getStoreConfigArray(storeConfigList: StoreConfig[]) {
+    public getStoreConfigObject(storeConfigList: StoreConfig[]) {
         const result: Store = {};
         for (const storeConfig of storeConfigList) {
             const value = this.getElementStoreConfig(storeConfig);
@@ -14,7 +14,17 @@ class StoreConfigService {
         return result;
     }
 
-    private getElementStoreConfig(storeConfig: StoreConfig) {
+    public getStoreConfigArray(storeConfigList: StoreConfig[]) {
+        const result: any[] = [];
+        for (const storeConfig of storeConfigList) {
+            const value = this.getElementStoreConfig(storeConfig);
+            result.push(convertService.convertVar(value, storeConfig.convert.type));
+        }
+        return result;
+    }
+
+
+    public getElementStoreConfig(storeConfig: StoreConfigElement) {
         if (storeConfig.const) {
             return storeConfig.const;
         }
