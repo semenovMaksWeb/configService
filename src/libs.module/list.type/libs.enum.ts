@@ -3,5 +3,6 @@ export enum TypeVarEnum {
     string = "string",
     number = "number",
     json = "json",
+    null = "null",
     array = "array"
 }
