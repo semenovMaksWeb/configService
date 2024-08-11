@@ -30,6 +30,14 @@ class StoreConfigService {
             return process.env[storeConfig.env]
         }
     }
+
+    public setStore(key: string | string[], value: any) {
+        if (Array.isArray(key)) {
+            storeService.setPathStore(key, value);
+            return;
+        }
+        storeService.setStore(key, value);
+    }
 }
 
 export const storeConfigService = new StoreConfigService();
