@@ -24,6 +24,7 @@ export interface CommandConnectionDatabase extends Command {
 
 export interface CommandSql extends Command {
     sql: {
+        type: StoreConfigElement,
         connection: StoreConfigElement,
         query: string;
         params: StoreConfig[]

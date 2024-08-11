@@ -1,13 +1,13 @@
-import { StoreConfig } from "@src/store.module/store.module";
-import { bdService } from "./bd.module/bd.service";
-
-import configTest from "../config/test.json"
+import configTest from "../config/test2.json"
+import { constuctorService } from "./constuctor.module/constuctor.service";
+import { Command } from "./constuctor.module/constuctor.interface";
+import { storeService } from "./store.module/store.service";
 
 const dotenv = require('dotenv');
 dotenv.config();
 
 (async () => {
-    const connection = bdService.connectionDatabase(configTest[0].connection as StoreConfig[])
-    const resultBd = await connection.query("select * from temp.test_bd_11_08_2024");
-    console.log(resultBd.rows);    
+    await constuctorService.runConfig(configTest as Command[]);
+    console.log(storeService.getAllStore());
+    
 })();
