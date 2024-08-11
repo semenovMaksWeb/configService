@@ -1,0 +1,52 @@
+[
+    {
+        "name": "connectionMain",
+        "action": "connectionDatabase",
+        "comment": "Подключение к бд",
+        "result": "=",
+        "connection": [
+            {
+                "key": "type",
+                "env": "BD_MAIN_TYPE",
+                "convert": {
+                    "type": "string"
+                }
+            },
+            {
+                "key": "user",
+                "env": "BD_MAIN_USER",
+                "convert": {
+                    "type": "string"
+                }
+            },
+            {
+                "key": "password",
+                "env": "BD_MAIN_PASSWORD",
+                "convert": {
+                    "type": "string"
+                }
+            },
+            {
+                "key": "host",
+                "env": "BD_MAIN_HOST",
+                "convert": {
+                    "type": "string"
+                }
+            },
+            {
+                "key": "port",
+                "env": "BD_MAIN_PORT",
+                "convert": {
+                    "type": "number"
+                }
+            },
+            {
+                "key": "database",
+                "env": "BD_MAIN_DATABASE",
+                "convert": {
+                    "type": "string"
+                }
+            }
+        ]
+    }
+]
