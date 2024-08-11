@@ -1,5 +1,6 @@
 export enum ConnectionBd {
-    POSTGRE_SQL = "PostgreSQL"
+    POSTGRE_SQL = "PostgreSQL",
+    MYSQL = "MySql"
 }
 
 export type BdConfigResult = {
