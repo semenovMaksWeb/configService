@@ -9,8 +9,7 @@ class BdService {
         const bdConfigResult: BdConfigResult = storeConfigService.getStoreConfigArray(bdConfigList) as BdConfigResult;
         switch (bdConfigResult.type) {
             case ConnectionBd.POSTGRE_SQL:
-                pgService.connection(bdConfigResult);
-                break;
+                return pgService.connection(bdConfigResult);
         }
     }
 }
