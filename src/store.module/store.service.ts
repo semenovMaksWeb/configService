@@ -13,18 +13,18 @@ class StoreService {
         this.store[key] = value;
     }
 
-    public setPathStore(path: string[], value: any): void {
-        let link = this.store;
-        let index = -1;
+    public pushStore(key: string, value: any): void {
+        this.store[key].push(value);
+    }
 
-        for (const key of path) {
-            index++;
-            if (index == path.length - 1) {
-                break;
-            }
-            link = link[key];
-        }
-        link[path[path.length - 1]] = value;
+    public pushPathStore(path: string[], value: any): void {
+        const { link, key } = this.getLinkElementStore(path);
+        link[key].push(value);
+    }
+
+    public setPathStore(path: string[], value: any): void {
+        const { link, key } = this.getLinkElementStore(path);
+        link[key] = value;
     }
 
     public getStore(key: string) {
@@ -39,6 +39,20 @@ class StoreService {
         }
 
         return link;
+    }
+
+    private getLinkElementStore(path: string[]) {
+        let link = this.store;
+        let index = -1;
+
+        for (const key of path) {
+            index++;
+            if (index == path.length - 1) {
+                break;
+            }
+            link = link[key];
+        }
+        return { link, key: path[path.length - 1] }
     }
 }
 

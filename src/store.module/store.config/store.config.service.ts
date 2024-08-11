@@ -1,3 +1,4 @@
+import { CommandResultOperator } from "@src/constuctor.module/constuctor.interface";
 import { convertService } from "@src/libs.module/libs.module";
 import { StoreConfig } from "@src/store.module/store.config/store.config.interface";
 import { Store } from "@src/store.module/store.interface";
@@ -31,13 +32,17 @@ class StoreConfigService {
         }
     }
 
-    public setStore(key: string | string[], value: any) {
-        if (Array.isArray(key)) {
-            storeService.setPathStore(key, value);
-            return;
+    public setStore(key: string | string[], value: any, commandResultOperator: CommandResultOperator) {
+        switch (commandResultOperator) {
+            case CommandResultOperator.EQUALLY:
+                Array.isArray(key) ? storeService.setPathStore(key, value) : storeService.setStore(key, value);
+                break
+
+            case CommandResultOperator.PUSH:
+                Array.isArray(key) ? storeService.pushPathStore(key, value) : storeService.pushStore(key, value);
+                break;
         }
-        storeService.setStore(key, value);
     }
 }
 
-export const storeConfigService = new StoreConfigService();
+export const storeConfigService = new StoreConfigService()
