@@ -1,26 +1,21 @@
 import { StoreConfig } from "@src/store.module/store.module"
 
-export enum ConstuctorAction {
+export enum CommandAction {
     CONNECTION_DATABASE = "connectionDatabase"
 }
 
-export enum ConstuctorResultOperator {
+export enum CommandResultOperator {
     PUSH = "push",
     EQUALLY = "="
 }
 
-export interface ConstuctorResult {
-    name: string;
-    operator: ConstuctorResultOperator;
-}
-
-export interface Constuctor {
-    action: ConstuctorAction,
-    result?: ConstuctorResult,
-    name: string;
+export interface Command {
+    action: CommandAction,
+    result: CommandResultOperator,
+    name: string | string[];
     comment: string | null
 }
 
-export interface ConstuctorConnectionDatabase extends Constuctor {
+export interface CommandConnectionDatabase extends Command {
     connection: StoreConfig[]
 }
