@@ -1,0 +1,1 @@
+export { fileService } from "@src/file.module/file.service"
