@@ -3,7 +3,8 @@ import { StoreConfig } from "@src/store.module/store.module"
 
 export enum CommandAction {
     CONNECTION_DATABASE = "connectionDatabase",
-    SQL_CALL = "sql"
+    SQL_CALL = "sql",
+    FILE_CONFIG = "fileConfig"
 }
 
 export enum CommandResultOperator {
@@ -29,4 +30,8 @@ export interface CommandSql extends Command {
         query: string;
         params: StoreConfig[]
     }
+}
+
+export interface CommandFileConfig extends Command {
+    path: string;
 }
