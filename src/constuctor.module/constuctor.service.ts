@@ -1,8 +1,9 @@
-import { Command, CommandAction, CommandConnectionDatabase, CommandFileConfig, CommandSql } from "@src/constuctor.module/constuctor.interface";
+import { Command, CommandAction, CommandConnectionDatabase, CommandFileConfig, CommandFileRead, CommandMappigJson, CommandSql } from "@src/constuctor.module/constuctor.interface";
 
 import { bdService } from "@src/bd.module/bd.module";
 import { fileService } from "@src/file.module/file.module";
 import { storeConfigService } from "@src/store.module/store.module";
+import { jsonService } from "@src/json.module/json.module";
 
 class ConstuctorService {
     private async convertFileConig(commandFileConfig: CommandFileConfig, commandList: Command[], index: number) {
@@ -28,6 +29,16 @@ class ConstuctorService {
                 case CommandAction.SQL_CALL:
                     const commandSql = command as CommandSql;
                     resultCommand = await bdService.sqlCall(commandSql);
+                    break;
+
+                case CommandAction.FILE_READ:
+                    const commandFileRead = command as CommandFileRead;
+                    resultCommand = await fileService.readFile(commandFileRead.path);
+                    break;
+                case CommandAction.MAPPING_JSON:
+                    const commandMappingJson = command as CommandMappigJson;
+                    const data = storeConfigService.getElementStoreConfig(commandMappingJson.mappingJson.json);
+                    resultCommand = jsonService.mappingJson(data, commandMappingJson.mappingJson.schema);
                     break;
             }
             storeConfigService.setStore(command.name, resultCommand, command.result);

@@ -1,10 +1,13 @@
-import { StoreConfigElement } from "@src/store.module/store.config/store.config.interface";
+import { JsonMappingSchema } from "@src/json.module/json.module";
+import { StoreConfigElement } from "@src/store.module/store.module";
 import { StoreConfig } from "@src/store.module/store.module"
 
 export enum CommandAction {
     CONNECTION_DATABASE = "connectionDatabase",
     SQL_CALL = "sql",
-    FILE_CONFIG = "fileConfig"
+    FILE_CONFIG = "fileConfig",
+    FILE_READ = "fileRead",
+    MAPPING_JSON = "mappingJson"
 }
 
 export enum CommandResultOperator {
@@ -32,6 +35,15 @@ export interface CommandSql extends Command {
     }
 }
 
-export interface CommandFileConfig extends Command {
+export interface CommandFileRead extends Command {
     path: string;
+}
+
+export interface CommandFileConfig extends CommandFileRead { }
+
+export interface CommandMappigJson extends Command {
+    mappingJson: {
+        json: StoreConfigElement,
+        schema: JsonMappingSchema[]
+    }
 }
