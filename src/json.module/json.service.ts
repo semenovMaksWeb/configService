@@ -1,7 +1,8 @@
 import { TypeVarEnum } from "@src/libs.module/libs.module";
+import { JsonMappingSchema } from "@src/json.module/json.interface";
 
 class JsonService {
-    public jsonToString(object: JSON) {
+    public jsonToString(object: any) {
         return JSON.stringify(object);
     }
 
@@ -9,7 +10,7 @@ class JsonService {
         return JSON.parse(string);
     }
 
-    public mappingJson(json: any, schemaList: any, result: any = {}) {
+    public mappingJson(json: any, schemaList: JsonMappingSchema[], result: any = {}) {
         if (Array.isArray(json)) {
             this.mappingJsonArray(json, schemaList, result);
             return;
@@ -18,7 +19,7 @@ class JsonService {
         return result;
     }
 
-    private mappingJsonObject(json: any, schemaList: any, result: any) {
+    private mappingJsonObject(json: any, schemaList: JsonMappingSchema[], result: any) {
         for (const schema of schemaList) {
             let root = json;
             if (schema.init) {
@@ -43,7 +44,7 @@ class JsonService {
         }
     }
 
-    private mappingJsonArray(json: any, schema: any, result: any) {
+    private mappingJsonArray(json: any, schema: JsonMappingSchema[], result: any) {
         for (const itemJson of json) {
             result.push({});
             this.mappingJsonObject(itemJson, schema, result[result.length - 1])
