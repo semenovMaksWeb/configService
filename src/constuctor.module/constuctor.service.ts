@@ -38,7 +38,8 @@ class ConstuctorService {
                 case CommandAction.MAPPING_JSON:
                     const commandMappingJson = command as CommandMappigJson;
                     const data = storeConfigService.getElementStoreConfig(commandMappingJson.mappingJson.json);
-                    resultCommand = jsonService.mappingJson(data, commandMappingJson.mappingJson.schema);
+                    const dataJson = jsonService.stringToJson(data);
+                    resultCommand = jsonService.mappingJson(dataJson, commandMappingJson.mappingJson.schema);
                     break;
             }
             storeConfigService.setStore(command.name, resultCommand, command.result);
