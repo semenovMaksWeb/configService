@@ -36,6 +36,10 @@ class JsonService {
             if (schema.path && !schema.init) {
                 result[schema.key] = this.getJsonElement(json, schema.path);
             }
+
+            if (schema.const && !schema.init) {
+                result[schema.key] = schema.const;
+            }
         }
     }
 
