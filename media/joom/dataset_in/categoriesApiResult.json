@@ -1,0 +1,881 @@
+{
+    "payload": {
+        "children": [
+            {
+                "id": "1597236420537374873-153-2-2-2926155289",
+                "name": "Женская мода",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/4a3aa75143cf3e5eef92dafba2c9ef9ea836fc04_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/4a3aa75143cf3e5eef92dafba2c9ef9ea836fc04_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/4a3aa75143cf3e5eef92dafba2c9ef9ea836fc04_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/4a3aa75143cf3e5eef92dafba2c9ef9ea836fc04_138_138.png"
+                        },
+                        {
+                            "width": 184,
+                            "height": 184,
+                            "url": "https://upload.joomcdn.net/4a3aa75143cf3e5eef92dafba2c9ef9ea836fc04_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1597236266669222893-190-2-2-2152716438",
+                "name": "Мужская мода",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/d65032881aa2190c006a1e4f4476a8c515a6ecdc_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/d65032881aa2190c006a1e4f4476a8c515a6ecdc_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/d65032881aa2190c006a1e4f4476a8c515a6ecdc_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/d65032881aa2190c006a1e4f4476a8c515a6ecdc_138_138.png"
+                        },
+                        {
+                            "width": 184,
+                            "height": 184,
+                            "url": "https://upload.joomcdn.net/d65032881aa2190c006a1e4f4476a8c515a6ecdc_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1597236200138726397-237-2-2-990526431",
+                "name": "Обувь",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/056a194aa03518317676507a8162294d646bead8_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/056a194aa03518317676507a8162294d646bead8_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/056a194aa03518317676507a8162294d646bead8_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/056a194aa03518317676507a8162294d646bead8_138_138.png"
+                        },
+                        {
+                            "width": 160,
+                            "height": 160,
+                            "url": "https://upload.joomcdn.net/056a194aa03518317676507a8162294d646bead8_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1597235882987370691-42-2-2-2200405303",
+                "name": "Товары для дома",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/41618b07807bf85da803ac673bb3de86556d5755_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/41618b07807bf85da803ac673bb3de86556d5755_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/41618b07807bf85da803ac673bb3de86556d5755_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/41618b07807bf85da803ac673bb3de86556d5755_138_138.png"
+                        },
+                        {
+                            "width": 160,
+                            "height": 160,
+                            "url": "https://upload.joomcdn.net/41618b07807bf85da803ac673bb3de86556d5755_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1597235813894143029-85-2-2-1579633414",
+                "name": "Сумки и чемоданы",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/cd704bcdc5c883b74057142010d150eccffd4ac4_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/cd704bcdc5c883b74057142010d150eccffd4ac4_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/cd704bcdc5c883b74057142010d150eccffd4ac4_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/cd704bcdc5c883b74057142010d150eccffd4ac4_138_138.png"
+                        },
+                        {
+                            "width": 184,
+                            "height": 184,
+                            "url": "https://upload.joomcdn.net/cd704bcdc5c883b74057142010d150eccffd4ac4_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1597235452827856356-43-2-2-652025559",
+                "name": "Электроника",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/a5ce6de3ef66e48df91ee179c5c22f60d02f88bc_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/a5ce6de3ef66e48df91ee179c5c22f60d02f88bc_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/a5ce6de3ef66e48df91ee179c5c22f60d02f88bc_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/a5ce6de3ef66e48df91ee179c5c22f60d02f88bc_138_138.png"
+                        },
+                        {
+                            "width": 184,
+                            "height": 184,
+                            "url": "https://upload.joomcdn.net/a5ce6de3ef66e48df91ee179c5c22f60d02f88bc_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1673446889678837369-49-2-5539-2288133055",
+                "name": "Чехлы для смартфонов",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/c2e0af6f5ef2088b65621bf8414d6ea64337133a_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/c2e0af6f5ef2088b65621bf8414d6ea64337133a_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/c2e0af6f5ef2088b65621bf8414d6ea64337133a_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/c2e0af6f5ef2088b65621bf8414d6ea64337133a_138_138.png"
+                        },
+                        {
+                            "width": 184,
+                            "height": 184,
+                            "url": "https://upload.joomcdn.net/c2e0af6f5ef2088b65621bf8414d6ea64337133a_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1662031757725176829-171-2-4896-2573701625",
+                "name": "Бытовая техника",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/507fb62a7be1cb7db63037daadc63b63fd08c288_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/507fb62a7be1cb7db63037daadc63b63fd08c288_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/507fb62a7be1cb7db63037daadc63b63fd08c288_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/507fb62a7be1cb7db63037daadc63b63fd08c288_138_138.png"
+                        },
+                        {
+                            "width": 160,
+                            "height": 160,
+                            "url": "https://upload.joomcdn.net/507fb62a7be1cb7db63037daadc63b63fd08c288_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1597235646282909165-98-2-2-431112858",
+                "name": "Детские товары",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/5d59b35f4fecf9a6dae5078ae0098f580471dca6_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/5d59b35f4fecf9a6dae5078ae0098f580471dca6_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/5d59b35f4fecf9a6dae5078ae0098f580471dca6_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/5d59b35f4fecf9a6dae5078ae0098f580471dca6_138_138.png"
+                        },
+                        {
+                            "width": 160,
+                            "height": 160,
+                            "url": "https://upload.joomcdn.net/5d59b35f4fecf9a6dae5078ae0098f580471dca6_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1597236132294941873-29-2-2-3277201823",
+                "name": "Красота",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/da662bf0542846d310845647175e64621a0bc4ac_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/da662bf0542846d310845647175e64621a0bc4ac_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/da662bf0542846d310845647175e64621a0bc4ac_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/da662bf0542846d310845647175e64621a0bc4ac_138_138.png"
+                        },
+                        {
+                            "width": 160,
+                            "height": 160,
+                            "url": "https://upload.joomcdn.net/da662bf0542846d310845647175e64621a0bc4ac_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1597235618475551294-13-2-2-485417274",
+                "name": "Здоровье",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/88dc0f8e84487a42c63c207a395a7c4e2b5f66a0_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/88dc0f8e84487a42c63c207a395a7c4e2b5f66a0_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/88dc0f8e84487a42c63c207a395a7c4e2b5f66a0_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/88dc0f8e84487a42c63c207a395a7c4e2b5f66a0_138_138.png"
+                        },
+                        {
+                            "width": 160,
+                            "height": 160,
+                            "url": "https://upload.joomcdn.net/88dc0f8e84487a42c63c207a395a7c4e2b5f66a0_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1597235350042495116-5-2-2-1836854559",
+                "name": "Товары для взрослых",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/6fd303d993a9051226e89e0550c675d975bc2bee_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/6fd303d993a9051226e89e0550c675d975bc2bee_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/6fd303d993a9051226e89e0550c675d975bc2bee_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/6fd303d993a9051226e89e0550c675d975bc2bee_138_138.png"
+                        },
+                        {
+                            "width": 160,
+                            "height": 160,
+                            "url": "https://upload.joomcdn.net/6fd303d993a9051226e89e0550c675d975bc2bee_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true,
+                "forAdults": true
+            },
+            {
+                "id": "1597235776556859389-233-2-2-3561717766",
+                "name": "Украшения и бижутерия",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/51135f027cb6c5fa85ae1adadd4595c708de1ce1_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/51135f027cb6c5fa85ae1adadd4595c708de1ce1_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/51135f027cb6c5fa85ae1adadd4595c708de1ce1_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/51135f027cb6c5fa85ae1adadd4595c708de1ce1_138_138.png"
+                        },
+                        {
+                            "width": 160,
+                            "height": 160,
+                            "url": "https://upload.joomcdn.net/51135f027cb6c5fa85ae1adadd4595c708de1ce1_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1597235833073242690-146-2-2-169396837",
+                "name": "Хобби и творчество",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/41352d04c563cc46c466ee425e62e3827599cbcc_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/41352d04c563cc46c466ee425e62e3827599cbcc_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/41352d04c563cc46c466ee425e62e3827599cbcc_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/41352d04c563cc46c466ee425e62e3827599cbcc_138_138.png"
+                        },
+                        {
+                            "width": 184,
+                            "height": 184,
+                            "url": "https://upload.joomcdn.net/41352d04c563cc46c466ee425e62e3827599cbcc_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1597236538330795184-24-2-2-1387203247",
+                "name": "Строительство и ремонт",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/c161289bd24a57a848c72167deb1f9723638619a_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/c161289bd24a57a848c72167deb1f9723638619a_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/c161289bd24a57a848c72167deb1f9723638619a_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/c161289bd24a57a848c72167deb1f9723638619a_138_138.png"
+                        },
+                        {
+                            "width": 184,
+                            "height": 184,
+                            "url": "https://upload.joomcdn.net/c161289bd24a57a848c72167deb1f9723638619a_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1597235359476028235-32-2-2-2527293201",
+                "name": "Автомобили и мотоциклы",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 36,
+                            "url": "https://resources.joomcdn.net/categories/auto/icn_auto_mdpi.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 54,
+                            "url": "https://resources.joomcdn.net/categories/auto/icn_auto_hdpi.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 72,
+                            "url": "https://resources.joomcdn.net/categories/auto/icn_auto_xhdpi.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 108,
+                            "url": "https://resources.joomcdn.net/categories/auto/icn_auto_xxhdpi.png"
+                        },
+                        {
+                            "width": 184,
+                            "height": 144,
+                            "url": "https://resources.joomcdn.net/categories/auto/icn_auto_xxxhdpi.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1597236314602595887-85-2-2-4274043837",
+                "name": "Спорт и отдых",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/fca8540a071fb17f4890108dceaf80961ef1b816_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/fca8540a071fb17f4890108dceaf80961ef1b816_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/fca8540a071fb17f4890108dceaf80961ef1b816_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/fca8540a071fb17f4890108dceaf80961ef1b816_138_138.png"
+                        },
+                        {
+                            "width": 184,
+                            "height": 184,
+                            "url": "https://upload.joomcdn.net/fca8540a071fb17f4890108dceaf80961ef1b816_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1597236525990385926-240-2-2-3115513341",
+                "name": "Часы",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/24d164b530fa1af0a00df0c318fa7049ac79c57c_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/24d164b530fa1af0a00df0c318fa7049ac79c57c_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/24d164b530fa1af0a00df0c318fa7049ac79c57c_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/24d164b530fa1af0a00df0c318fa7049ac79c57c_138_138.png"
+                        },
+                        {
+                            "width": 184,
+                            "height": 184,
+                            "url": "https://upload.joomcdn.net/24d164b530fa1af0a00df0c318fa7049ac79c57c_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1597236221409616075-44-2-2-1300039495",
+                "name": "Канцелярия",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/3e342e739c58984e99ab55a0f3f8ac773d6c77f4_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/3e342e739c58984e99ab55a0f3f8ac773d6c77f4_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/3e342e739c58984e99ab55a0f3f8ac773d6c77f4_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/3e342e739c58984e99ab55a0f3f8ac773d6c77f4_138_138.png"
+                        },
+                        {
+                            "width": 184,
+                            "height": 184,
+                            "url": "https://upload.joomcdn.net/3e342e739c58984e99ab55a0f3f8ac773d6c77f4_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1597235790770496139-17-2-2-224995460",
+                "name": "Товары для животных",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/2ca67fd52101f9068be2cde3ab3cd922d3155aef_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/2ca67fd52101f9068be2cde3ab3cd922d3155aef_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/2ca67fd52101f9068be2cde3ab3cd922d3155aef_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/2ca67fd52101f9068be2cde3ab3cd922d3155aef_138_138.png"
+                        },
+                        {
+                            "width": 184,
+                            "height": 184,
+                            "url": "https://upload.joomcdn.net/2ca67fd52101f9068be2cde3ab3cd922d3155aef_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1597236105210325194-203-2-2-3866847155",
+                "name": "Дача, сад и огород",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 45,
+                            "url": "https://upload.joomcdn.net/bc7ff7689240116103962c0ca8f8b5b33acf337b_46_45.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 68,
+                            "url": "https://upload.joomcdn.net/bc7ff7689240116103962c0ca8f8b5b33acf337b_69_68.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 90,
+                            "url": "https://upload.joomcdn.net/bc7ff7689240116103962c0ca8f8b5b33acf337b_92_90.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 136,
+                            "url": "https://upload.joomcdn.net/bc7ff7689240116103962c0ca8f8b5b33acf337b_138_136.png"
+                        },
+                        {
+                            "width": 162,
+                            "height": 160,
+                            "url": "https://upload.joomcdn.net/bc7ff7689240116103962c0ca8f8b5b33acf337b_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1608572094646975890-4-2-2-2446371880",
+                "name": "K-pop",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/14bd3a94c844b5d42680908527ae9226fd8cfdba_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/14bd3a94c844b5d42680908527ae9226fd8cfdba_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/14bd3a94c844b5d42680908527ae9226fd8cfdba_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/14bd3a94c844b5d42680908527ae9226fd8cfdba_138_138.png"
+                        },
+                        {
+                            "width": 160,
+                            "height": 160,
+                            "url": "https://upload.joomcdn.net/14bd3a94c844b5d42680908527ae9226fd8cfdba_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1665653702043584260-101-2-9994-999338266",
+                "name": "Праздники",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/30b13a3f40e1134976bf3d02abeed2dce005f649_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/30b13a3f40e1134976bf3d02abeed2dce005f649_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/30b13a3f40e1134976bf3d02abeed2dce005f649_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/30b13a3f40e1134976bf3d02abeed2dce005f649_138_138.png"
+                        },
+                        {
+                            "width": 160,
+                            "height": 160,
+                            "url": "https://upload.joomcdn.net/30b13a3f40e1134976bf3d02abeed2dce005f649_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1710825610034408785-54-2-17053-1986266478",
+                "name": "Игрушки и игры",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/5a710f74622ccc2ad7e21e90a3624377b0654468_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/5a710f74622ccc2ad7e21e90a3624377b0654468_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/5a710f74622ccc2ad7e21e90a3624377b0654468_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/5a710f74622ccc2ad7e21e90a3624377b0654468_138_138.png"
+                        },
+                        {
+                            "width": 184,
+                            "height": 184,
+                            "url": "https://upload.joomcdn.net/5a710f74622ccc2ad7e21e90a3624377b0654468_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1661872731532472090-214-2-54283-674391446",
+                "name": "Xiaomi",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/bc0ef76f63b316dc83d181c6e3d499f2bb1d3dd9_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/bc0ef76f63b316dc83d181c6e3d499f2bb1d3dd9_69_69.png"
+                        },
+                        {
+                            "width": 80,
+                            "height": 80,
+                            "url": "https://upload.joomcdn.net/bc0ef76f63b316dc83d181c6e3d499f2bb1d3dd9_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": true
+            },
+            {
+                "id": "1702995086130533533-178-2-14855-2635187613",
+                "name": "Книги",
+                "mainImage": {
+                    "images": [
+                        {
+                            "width": 46,
+                            "height": 46,
+                            "url": "https://upload.joomcdn.net/dddb8491e2c2c1094d88482f799a819d7150fddd_46_46.png"
+                        },
+                        {
+                            "width": 69,
+                            "height": 69,
+                            "url": "https://upload.joomcdn.net/dddb8491e2c2c1094d88482f799a819d7150fddd_69_69.png"
+                        },
+                        {
+                            "width": 92,
+                            "height": 92,
+                            "url": "https://upload.joomcdn.net/dddb8491e2c2c1094d88482f799a819d7150fddd_92_92.png"
+                        },
+                        {
+                            "width": 138,
+                            "height": 138,
+                            "url": "https://upload.joomcdn.net/dddb8491e2c2c1094d88482f799a819d7150fddd_138_138.png"
+                        },
+                        {
+                            "width": 160,
+                            "height": 160,
+                            "url": "https://upload.joomcdn.net/dddb8491e2c2c1094d88482f799a819d7150fddd_original.png"
+                        }
+                    ]
+                },
+                "hasPublicChildren": false
+            }
+        ]
+    }
+}
