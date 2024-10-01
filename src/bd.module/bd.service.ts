@@ -20,9 +20,9 @@ class BdService {
     public async sqlCall(commandSql: CommandSql) {
 
         // TODO Придумать как определять type СУБД
-        const connection = storeConfigService.getElementStoreConfig(commandSql.sql.connection);
+        const connection = storeConfigService.getElementStoreConfigConstructor(commandSql.sql.connection);
         const paramsSql = storeConfigService.getStoreConfigArray(commandSql.sql.params);
-        const typeBd = storeConfigService.getElementStoreConfig(commandSql.sql.type);
+        const typeBd = storeConfigService.getElementStoreConfigConstructor(commandSql.sql.type);
         let sqlResult = null;
         switch (typeBd) {
             case ConnectionBd.POSTGRE_SQL:

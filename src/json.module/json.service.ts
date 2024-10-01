@@ -7,6 +7,8 @@ class JsonService {
     }
 
     public stringToJson(string: string) {
+        console.trace(1);
+        
         return JSON.parse(string);
     }
 

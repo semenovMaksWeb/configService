@@ -1,4 +1,4 @@
-import configTest from "../config/joom/parsingApi.json"
+import configTest from "../config/joom/parsingCategories.json"
 
 import { Command, constuctorService } from "./constuctor.module/constuctor.module";
 import { storeService } from "./store.module/store.module";
@@ -8,5 +8,5 @@ dotenv.config();
 
 (async () => {
     await constuctorService.runConfig(configTest as Command[]);
-    console.log(storeService.getAllStore());
+    console.log(storeService.getAllStore().jsonParsing);
 })();

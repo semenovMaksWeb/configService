@@ -7,6 +7,7 @@ export enum CommandAction {
     SQL_CALL = "sql",
     FILE_CONFIG = "fileConfig",
     FILE_READ = "fileRead",
+    FILE_WRITE = "fileWrite",
     MAPPING_JSON = "mappingJson"
 }
 
@@ -37,6 +38,13 @@ export interface CommandSql extends Command {
 
 export interface CommandFileRead extends Command {
     path: string;
+}
+
+export interface CommandFileWrite extends Command {
+    fileWrite: {
+        path: StoreConfigElement;
+        data: StoreConfigElement;
+    }
 }
 
 export interface CommandFileConfig extends CommandFileRead { }

@@ -1,0 +1,77 @@
+[
+    {
+        "name": "fileApi",
+        "result": "=",
+        "comment": "Чтения файла: Ответ с категориями",
+        "action": "fileRead",
+        "path": "./media/joom/dataset_in/categoriesApiResult.json"
+    },
+    {
+        "name": "jsonParsing",
+        "comment": "Преобразование json для дальнейшего записание в БД",
+        "action": "mappingJson",
+        "result": "=",
+        "mappingJson": {
+            "schema": [
+                {
+                    "key": "categories",
+                    "type": "array",
+                    "init": true,
+                    "root": [
+                        "payload",
+                        "children"
+                    ],
+                    "children": [
+                        {
+                            "key": "name",
+                            "type": "item",
+                            "init": false,
+                            "path": [
+                                "name"
+                            ]
+                        },
+                        {
+                            "key": "image",
+                            "type": "item",
+                            "init": false,
+                            "path": [
+                                "mainImage",
+                                "images",
+                                "0",
+                                "url"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "json": {
+                "store": "fileApi",
+                "convert": {
+                    "type": "json"
+                }
+            }
+        }
+    },
+    {
+        "name": "saveJsonFile",
+        "comment": "Сохранить json в файл",
+        "action": "fileWrite",
+        "fileWrite": {
+            "path": {
+                "const": "./media/joom/dataset_out/categories.json",
+                "convert": {
+                    "type": "string"
+                }
+            },
+            "data": {
+                "store": [
+                    "jsonParsing",
+                    "categories"
+                ],
+                "convert": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+]

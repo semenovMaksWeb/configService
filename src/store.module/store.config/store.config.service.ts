@@ -23,8 +23,12 @@ class StoreConfigService {
         return result;
     }
 
+    public getElementStoreConfigConstructor(storeConfig: StoreConfigElement) {
+        const value = this.getElementStoreConfig(storeConfig);
+        return convertService.convertVar(value, storeConfig.convert.type);
+    }
 
-    public getElementStoreConfig(storeConfig: StoreConfigElement) {
+    private getElementStoreConfig(storeConfig: StoreConfigElement) {
         if (storeConfig.const) {
             return storeConfig.const;
         }

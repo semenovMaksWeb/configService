@@ -4,9 +4,13 @@ class ConvertService {
     convertVar(value: any, type: TypeVarEnum) {
         switch (type) {
             case TypeVarEnum.string: {
-                if (value) {
+                if (value && !Array.isArray(value)) {
                     value = value.toString();
                 }
+                if (Array.isArray(value)) {
+                    value = JSON.stringify(value);
+                }
+                return value;
                 break;
             }
             case TypeVarEnum.number: {

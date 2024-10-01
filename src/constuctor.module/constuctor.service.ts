@@ -1,4 +1,4 @@
-import { Command, CommandAction, CommandConnectionDatabase, CommandFileConfig, CommandFileRead, CommandMappigJson, CommandSql } from "@src/constuctor.module/constuctor.interface";
+import { Command, CommandAction, CommandConnectionDatabase, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandMappigJson, CommandSql } from "@src/constuctor.module/constuctor.interface";
 
 import { bdService } from "@src/bd.module/bd.module";
 import { fileService } from "@src/file.module/file.module";
@@ -35,11 +35,18 @@ class ConstuctorService {
                     const commandFileRead = command as CommandFileRead;
                     resultCommand = await fileService.readFile(commandFileRead.path);
                     break;
+
+                case CommandAction.FILE_WRITE:
+                    const commandFileWrite = command as CommandFileWrite;
+                    const pathFileWrite = storeConfigService.getElementStoreConfigConstructor(commandFileWrite.fileWrite.path);
+                    const dataFileWrite = storeConfigService.getElementStoreConfigConstructor(commandFileWrite.fileWrite.data);
+                    await fileService.writeFile(pathFileWrite, dataFileWrite);
+                    break;
+
                 case CommandAction.MAPPING_JSON:
                     const commandMappingJson = command as CommandMappigJson;
-                    const data = storeConfigService.getElementStoreConfig(commandMappingJson.mappingJson.json);
-                    const dataJson = jsonService.stringToJson(data);
-                    resultCommand = jsonService.mappingJson(dataJson, commandMappingJson.mappingJson.schema);
+                    const dataJsonMapping = storeConfigService.getElementStoreConfigConstructor(commandMappingJson.mappingJson.json);                  
+                    resultCommand = jsonService.mappingJson(dataJsonMapping, commandMappingJson.mappingJson.schema);
                     break;
             }
             storeConfigService.setStore(command.name, resultCommand, command.result);
