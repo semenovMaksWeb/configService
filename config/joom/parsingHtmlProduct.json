@@ -1,7 +1,18 @@
 [
     {
+        "name": "productList",
+        "action": "initVar",
+        "commit": "Иницилизируем массив результат конвертации данных с html",
+        "initVar": {
+            "const": [],
+            "convert": {
+                "type": "array"
+            }
+        }
+    },
+    {
         "name": "forElementFile",
-        "commit": "Прогнать в цилке файлы указанные в for.array",
+        "commit": "Прогнать в цикле файлы указанные в for.array",
         "action": "for",
         "for": {
             "item": {
@@ -25,7 +36,7 @@
                 {
                     "name": "fileApi",
                     "result": "=",
-                    "comment": "Чтения файла из цикла",
+                    "comment": "Чтения файла из элемента цикла",
                     "action": "fileRead",
                     "path": {
                         "store": "fileItem",
@@ -35,7 +46,127 @@
                     }
                 },
                 {
-                    "name": ""
+                    "name": "htmlDom",
+                    "action": "convertInDom",
+                    "result": "=",
+                    "comment": "Создание dom element из строки файла",
+                    "convertInDom": {
+                        "html": {
+                            "store": "fileApi"
+                        }
+                    }
+                },
+                {
+                    "name": "productDomList",
+                    "action": "findElementHtmlAll",
+                    "result": "=",
+                    "comment": "Поиск всех продуктов из dom element-ов",
+                    "findElementHtmlAll": {
+                        "html": {
+                            "store": "htmlDom"
+                        },
+                        "selector": {
+                            "store": ".cell___ixESO"
+                        }
+                    }
+                },
+                {
+                    "name": "forElementDom",
+                    "commit": "Прогнать в цикле dom element продуктов указанные в for.array",
+                    "action": "for",
+                    "for": {
+                        "item": {
+                            "store": "productDom",
+                            "convert": {
+                                "type": "string"
+                            }
+                        },
+                        "array": {
+                            "store": "productDomList",
+                            "convert": {
+                                "type": "array"
+                            }
+                        },
+                        "config": [
+                            {
+                                "name": "productObject",
+                                "comment": "Создать пустой объект в который будет записывать результат сохранения конвертации",
+                                "action": "initVar",
+                                "initVar": {
+                                    "const": {},
+                                    "convert": {
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            {
+                                "name": [
+                                    "productObject",
+                                    "name"
+                                ],
+                                "action": "getInnerHtml",
+                                "comment": "Сохранения имени продукта в объект",
+                                "result": "=",
+                                "getInnerHtml": {
+                                    "html": {
+                                        "store": "productDom"
+                                    },
+                                    "selector": {
+                                        "store": ".name___asFfu"
+                                    }
+                                }
+                            },
+                            {
+                                "name": [
+                                    "productObject",
+                                    "price"
+                                ],
+                                "comment": "Сохранения цены продукта в объект",
+                                "action": "getInnerHtml",
+                                "result": "=",
+                                "getInnerHtml": {
+                                    "html": {
+                                        "store": "productDom"
+                                    },
+                                    "selector": {
+                                        "store": ".price___Vlu0y span:not(.hidden___pmcai)"
+                                    }
+                                }
+                            },
+                            {
+                                "name": [
+                                    "productObject",
+                                    "image"
+                                ],
+                                "comment": "Сохранения url изображения продукта в объект",
+                                "action": "getAtrHtml",
+                                "result": "=",
+                                "getAtrHtml": {
+                                    "html": {
+                                        "store": "productDom"
+                                    },
+                                    "nameArt": {
+                                        "const": "src"
+                                    },
+                                    "selector": {
+                                        "store": ".price___Vlu0y span:not(.hidden___pmcai)"
+                                    }
+                                }
+                            },
+                            {
+                                "name": "productList",
+                                "action": "findVar",
+                                "comment": "Сохранения объекта в массив результата",
+                                "result": "push",
+                                "findVar": {
+                                    "store": "productObject",
+                                    "convert": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        ]
+                    }
                 }
             ]
         }

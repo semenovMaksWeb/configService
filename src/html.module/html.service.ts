@@ -6,12 +6,20 @@ class HtmlService {
         return new JSDOM(html).window.document.body;
     }
 
-    findElement(selector: string, html: HTMLElement) {
+    findElementHtml(selector: string, html: HTMLElement) {
         return html.querySelector(selector);
     }
 
-    findElemetnAll(selector: string, html: HTMLElement) {
+    findElementHtmlAll(selector: string, html: HTMLElement) {
         return html.querySelectorAll(selector);
+    }
+
+    getInnerHtml(selector: string, html: HTMLElement) {
+        return html.querySelector(selector)?.innerHTML;
+    }
+
+    getAtrHtml(selector: string, nameArt: string, html: HTMLElement) {
+        return html.querySelector(selector)?.getAttribute(nameArt);
     }
 }
 
