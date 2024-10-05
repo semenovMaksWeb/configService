@@ -1,0 +1,43 @@
+[
+    {
+        "name": "forElementFile",
+        "commit": "Прогнать в цилке файлы указанные в for.array",
+        "action": "for",
+        "for": {
+            "item": {
+                "store": "fileItem",
+                "convert": {
+                    "type": "string"
+                }
+            },
+            "array": {
+                "const": [
+                    "./media/joom/dataset_in/product_html/Женская_мода.html",
+                    "./media/joom/dataset_in/product_html/Мужская_мода.html",
+                    "./media/joom/dataset_in/product_html/Обувь.html",
+                    "./media/joom/dataset_in/product_html/Товары_для_дома.html"
+                ],
+                "convert": {
+                    "type": "array"
+                }
+            },
+            "config": [
+                {
+                    "name": "fileApi",
+                    "result": "=",
+                    "comment": "Чтения файла из цикла",
+                    "action": "fileRead",
+                    "path": {
+                        "store": "fileItem",
+                        "convert": {
+                            "type": "string"
+                        }
+                    }
+                },
+                {
+                    "name": ""
+                }
+            ]
+        }
+    }
+]

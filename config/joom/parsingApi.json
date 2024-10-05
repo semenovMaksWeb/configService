@@ -4,7 +4,12 @@
         "result": "=",
         "comment": "Чтения файла",
         "action": "fileRead",
-        "path": "./temp/dataset/joomApi.json"
+        "path": {
+            "const": "./temp/dataset/joomApi.json",
+            "convert": {
+                "type": "string"
+            }
+        }
     },
     {
         "name": "jsonParsing",
