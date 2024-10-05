@@ -33,7 +33,8 @@ class ConstuctorService {
 
                 case CommandAction.FILE_READ:
                     const commandFileRead = command as CommandFileRead;
-                    resultCommand = await fileService.readFile(commandFileRead.path);
+                    const pathFileRead = storeConfigService.getElementStoreConfigConstructor(commandFileRead.path) as string;
+                    resultCommand = await fileService.readFile(pathFileRead);
                     break;
 
                 case CommandAction.FILE_WRITE:
@@ -45,7 +46,7 @@ class ConstuctorService {
 
                 case CommandAction.MAPPING_JSON:
                     const commandMappingJson = command as CommandMappigJson;
-                    const dataJsonMapping = storeConfigService.getElementStoreConfigConstructor(commandMappingJson.mappingJson.json);                  
+                    const dataJsonMapping = storeConfigService.getElementStoreConfigConstructor(commandMappingJson.mappingJson.json);
                     resultCommand = jsonService.mappingJson(dataJsonMapping, commandMappingJson.mappingJson.schema);
                     break;
             }

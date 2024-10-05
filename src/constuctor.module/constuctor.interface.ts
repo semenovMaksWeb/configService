@@ -37,7 +37,7 @@ export interface CommandSql extends Command {
 }
 
 export interface CommandFileRead extends Command {
-    path: string;
+    path: StoreConfigElement;
 }
 
 export interface CommandFileWrite extends Command {
