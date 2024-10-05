@@ -21,7 +21,9 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "@types/jsdom": "^21.1.7",
     "dotenv": "^16.4.5",
+    "jsdom": "^25.0.1",
     "mysql2": "^3.11.0",
     "pg": "^8.12.0"
   }
