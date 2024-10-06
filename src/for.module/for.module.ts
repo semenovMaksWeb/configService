@@ -1,0 +1,1 @@
+import { forService } from "@src/for.module/for.service"

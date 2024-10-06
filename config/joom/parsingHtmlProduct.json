@@ -23,12 +23,7 @@
         "commit": "Прогнать в цикле файлы указанные в for.array",
         "action": "for",
         "for": {
-            "item": {
-                "store": "fileItem",
-                "convert": {
-                    "type": "string"
-                }
-            },
+            "item": "fileItem",
             "array": {
                 "store": [
                     "fileList"

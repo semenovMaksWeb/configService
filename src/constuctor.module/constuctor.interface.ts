@@ -14,7 +14,7 @@ export enum CommandAction {
     MAPPING_JSON = "mappingJson", // из 1 json в др. json
 
     INIT_VAR = "initVar", // создать(иницилизировать) переменную
-    
+
     FOR = "for", // прогнать в цикле что либо
 
     CONVERT_IN_DOM = "convertInDom", // команда из строки в dom-element
@@ -65,6 +65,14 @@ export interface CommandFileWrite extends Command {
     fileWrite: {
         path: StoreConfigElement;
         data: StoreConfigElement;
+    }
+}
+
+export interface CommandFor extends Command {
+    for: {
+        item: string | string[],
+        array: StoreConfigElement,
+        config: Command[],
     }
 }
 
