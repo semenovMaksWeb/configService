@@ -11,6 +11,14 @@
         }
     },
     {
+        "name": "fileList",
+        "action": "directoryFile",
+        "commit": "Проверка всех файлов в директиве",
+        "path": {
+            "const": "./media/joom/dataset_in/product_html"
+        }
+    },
+    {
         "name": "forElementFile",
         "commit": "Прогнать в цикле файлы указанные в for.array",
         "action": "for",
@@ -22,11 +30,8 @@
                 }
             },
             "array": {
-                "const": [
-                    "./media/joom/dataset_in/product_html/Женская_мода.html",
-                    "./media/joom/dataset_in/product_html/Мужская_мода.html",
-                    "./media/joom/dataset_in/product_html/Обувь.html",
-                    "./media/joom/dataset_in/product_html/Товары_для_дома.html"
+                "store": [
+                    "fileList"
                 ],
                 "convert": {
                     "type": "array"
@@ -155,10 +160,10 @@
                             },
                             {
                                 "name": "productList",
-                                "action": "findVar",
+                                "action": "initVar",
                                 "comment": "Сохранения объекта в массив результата",
                                 "result": "push",
-                                "findVar": {
+                                "initVar": {
                                     "store": "productObject",
                                     "convert": {
                                         "type": "object"
