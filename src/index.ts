@@ -1,4 +1,4 @@
-import configTest from "../config/joom/parsingCategories.json"
+import configTest from "../config/joom/parsingHtmlProduct.json"
 
 import { Command, constuctorService } from "./constuctor.module/constuctor.module";
 import { storeService } from "./store.module/store.module";
