@@ -2,35 +2,35 @@
     {
         "name": "productList",
         "action": "initVar",
-        "commit": "Иницилизируем массив результат конвертации данных с html",
+        "result": "=",
+        "comment": "Иницилизируем массив результат конвертации данных с html",
         "initVar": {
             "const": [],
-            "convert": {
-                "type": "array"
-            }
+            "convert": null
         }
     },
     {
         "name": "fileList",
         "action": "directoryFile",
-        "commit": "Проверка всех файлов в директиве",
+        "result": "=",
+        "comment": "Проверка всех файлов в директиве",
         "path": {
-            "const": "./media/joom/dataset_in/product_html"
+            "const": "./media/joom/dataset_in/product_html",
+            "convert": null
         }
     },
     {
         "name": "forElementFile",
-        "commit": "Прогнать в цикле файлы указанные в for.array",
+        "comment": "Прогнать в цикле файлы указанные в for.array",
         "action": "for",
+        "result": "null",
         "for": {
             "item": "fileItem",
             "array": {
                 "store": [
                     "fileList"
                 ],
-                "convert": {
-                    "type": "array"
-                }
+                "convert": null
             },
             "config": [
                 {
@@ -40,9 +40,7 @@
                     "action": "fileRead",
                     "path": {
                         "store": "fileItem",
-                        "convert": {
-                            "type": "string"
-                        }
+                        "convert": null
                     }
                 },
                 {
@@ -52,7 +50,8 @@
                     "comment": "Создание dom element из строки файла",
                     "convertInDom": {
                         "html": {
-                            "store": "fileApi"
+                            "store": "fileApi",
+                            "convert": null
                         }
                     }
                 },
@@ -63,29 +62,28 @@
                     "comment": "Поиск всех продуктов из dom element-ов",
                     "findElementHtmlAll": {
                         "html": {
-                            "store": "htmlDom"
+                            "store": "htmlDom",
+                            "convert": null
                         },
                         "selector": {
-                            "store": ".cell___ixESO"
+                            "store": ".cell___ixESO",
+                            "convert": null
                         }
                     }
                 },
                 {
                     "name": "forElementDom",
-                    "commit": "Прогнать в цикле dom element продуктов указанные в for.array",
+                    "comment": "Прогнать в цикле dom element продуктов указанные в for.array",
                     "action": "for",
+                    "result": "null",
                     "for": {
                         "item": {
                             "store": "productDom",
-                            "convert": {
-                                "type": "string"
-                            }
+                            "convert": null
                         },
                         "array": {
                             "store": "productDomList",
-                            "convert": {
-                                "type": "array"
-                            }
+                            "convert": null
                         },
                         "config": [
                             {
@@ -94,9 +92,7 @@
                                 "action": "initVar",
                                 "initVar": {
                                     "const": {},
-                                    "convert": {
-                                        "type": "object"
-                                    }
+                                    "convert": null
                                 }
                             },
                             {
@@ -109,10 +105,12 @@
                                 "result": "=",
                                 "getInnerHtml": {
                                     "html": {
-                                        "store": "productDom"
+                                        "store": "productDom",
+                                        "convert": null
                                     },
                                     "selector": {
-                                        "store": ".name___asFfu"
+                                        "store": ".name___asFfu",
+                                        "convert": null
                                     }
                                 }
                             },
@@ -126,10 +124,12 @@
                                 "result": "=",
                                 "getInnerHtml": {
                                     "html": {
-                                        "store": "productDom"
+                                        "store": "productDom",
+                                        "convert": null
                                     },
                                     "selector": {
-                                        "store": ".price___Vlu0y span:not(.hidden___pmcai)"
+                                        "store": ".price___Vlu0y span:not(.hidden___pmcai)",
+                                        "convert": null
                                     }
                                 }
                             },
@@ -143,13 +143,16 @@
                                 "result": "=",
                                 "getAtrHtml": {
                                     "html": {
-                                        "store": "productDom"
+                                        "store": "productDom",
+                                        "convert": null
                                     },
                                     "nameArt": {
-                                        "const": "src"
+                                        "const": "src",
+                                        "convert": null
                                     },
                                     "selector": {
-                                        "store": ".price___Vlu0y span:not(.hidden___pmcai)"
+                                        "store": ".price___Vlu0y span:not(.hidden___pmcai)",
+                                        "convert": null
                                     }
                                 }
                             },
@@ -160,9 +163,7 @@
                                 "result": "push",
                                 "initVar": {
                                     "store": "productObject",
-                                    "convert": {
-                                        "type": "object"
-                                    }
+                                    "convert": null
                                 }
                             }
                         ]

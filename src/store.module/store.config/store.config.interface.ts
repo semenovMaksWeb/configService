@@ -7,7 +7,7 @@ export type StoreConfig = {
     store?: string | string[],
     convert: {
         type: TypeVarEnum
-    }
+    } | null,
 }
 
 export type StoreConfigElement = Omit<StoreConfig, "key">;

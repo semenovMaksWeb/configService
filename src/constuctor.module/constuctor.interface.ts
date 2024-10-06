@@ -26,7 +26,8 @@ export enum CommandAction {
 
 export enum CommandResultOperator {
     PUSH = "push",
-    EQUALLY = "="
+    EQUALLY = "=",
+    NULL = "null",
 }
 
 export interface Command {

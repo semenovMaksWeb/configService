@@ -9,7 +9,7 @@ class StoreConfigService {
         const result: Store = {};
         for (const storeConfig of storeConfigList) {
             const value = this.getElementStoreConfig(storeConfig);
-            result[storeConfig.key] = convertService.convertVar(value, storeConfig.convert.type);
+            result[storeConfig.key] = convertService.convertVar(value, storeConfig.convert?.type);
         }
         return result;
     }
@@ -18,14 +18,14 @@ class StoreConfigService {
         const result: any[] = [];
         for (const storeConfig of storeConfigList) {
             const value = this.getElementStoreConfig(storeConfig);
-            result.push(convertService.convertVar(value, storeConfig.convert.type));
+            result.push(convertService.convertVar(value, storeConfig.convert?.type));
         }
         return result;
     }
 
     public getElementStoreConfigConstructor(storeConfig: StoreConfigElement) {
         const value = this.getElementStoreConfig(storeConfig);
-        return convertService.convertVar(value, storeConfig.convert.type);
+        return convertService.convertVar(value, storeConfig.convert?.type);
     }
 
     private getElementStoreConfig(storeConfig: StoreConfigElement) {

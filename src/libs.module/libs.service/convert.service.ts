@@ -1,8 +1,12 @@
 import { TypeVarEnum } from "@src/libs.module/list.type/libs.enum";
 
 class ConvertService {
-    convertVar(value: any, type: TypeVarEnum) {
+    convertVar(value: any, type: TypeVarEnum | undefined) {
+
         switch (type) {
+            case undefined: {
+                break;
+            }
             case TypeVarEnum.string: {
                 if (value && !Array.isArray(value)) {
                     value = value.toString();
