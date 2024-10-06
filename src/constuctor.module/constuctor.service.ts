@@ -86,7 +86,7 @@ class ConstuctorService {
                     const htmlFindElementAll = storeConfigService.getElementStoreConfigConstructor(commandFindElementHtmlAll.findElementHtmlAll.html);
                     const selectorFindElementAll = storeConfigService.getElementStoreConfigConstructor(commandFindElementHtmlAll.findElementHtmlAll.selector);
                     loggerService.info("выполнен поиск списка элемента в html", { config: commandFindElementHtmlAll, result: resultCommand, params: { htmlFindElementAll, selectorFindElementAll } })
-                    resultCommand = await htmlService.findElementHtmlAll(htmlFindElementAll, selectorFindElementAll);
+                    resultCommand = await htmlService.findElementHtmlAll(selectorFindElementAll, htmlFindElementAll);
                     break;
 
                 case CommandAction.GET_INNER_HTML: // из dom-element получить его содержимое
