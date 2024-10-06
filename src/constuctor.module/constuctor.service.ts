@@ -86,15 +86,15 @@ class ConstuctorService {
                     const htmlFindElementAll = storeConfigService.getElementStoreConfigConstructor(commandFindElementHtmlAll.findElementHtmlAll.html);
                     const selectorFindElementAll = storeConfigService.getElementStoreConfigConstructor(commandFindElementHtmlAll.findElementHtmlAll.selector);
                     loggerService.info("выполнен поиск списка элемента в html", { config: commandFindElementHtmlAll, result: resultCommand, params: { htmlFindElementAll, selectorFindElementAll } })
-                    resultCommand = await htmlService.findElementHtmlAll(selectorFindElementAll, htmlFindElementAll);
+                    resultCommand = htmlService.findElementHtmlAll(selectorFindElementAll, htmlFindElementAll);
                     break;
 
                 case CommandAction.GET_INNER_HTML: // из dom-element получить его содержимое
                     const commandGetInnerHtml = command as CommandGetInnerHtml;
                     const htmlGetInnerHtml = storeConfigService.getElementStoreConfigConstructor(commandGetInnerHtml.getInnerHtml.html);
                     const selectorGetInnerHtml = storeConfigService.getElementStoreConfigConstructor(commandGetInnerHtml.getInnerHtml.selector);
+                    resultCommand = htmlService.getInnerHtml(selectorGetInnerHtml, htmlGetInnerHtml);
                     loggerService.info("Получения текста с html", { config: commandGetInnerHtml, result: resultCommand, params: { htmlGetInnerHtml, selectorGetInnerHtml } })
-                    resultCommand = await htmlService.getInnerHtml(selectorGetInnerHtml, htmlGetInnerHtml);
                     break;
 
                 case CommandAction.GET_INNER_HTML: // из dom-element получить его содержимое
@@ -102,7 +102,7 @@ class ConstuctorService {
                     const htmlGetAtrHtml = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.html);
                     const selectorGetAtrHtml = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.html);
                     const nameAtrGetAtrHtml = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.html);
-                    resultCommand = await htmlService.getAtrHtml(htmlGetAtrHtml, nameAtrGetAtrHtml, selectorGetAtrHtml);
+                    resultCommand = htmlService.getAtrHtml(htmlGetAtrHtml, nameAtrGetAtrHtml, selectorGetAtrHtml);
                     break;
             }
             storeConfigService.setStore(command.name, resultCommand, command.result);
