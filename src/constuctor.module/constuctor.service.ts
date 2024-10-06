@@ -1,9 +1,11 @@
-import { Command, CommandAction, CommandConnectionDatabase, CommandDirectoryFile, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandInitVar, CommandMappigJson, CommandSql } from "@src/constuctor.module/constuctor.interface";
+import { Command, CommandAction, CommandConnectionDatabase, CommandDirectoryFile, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFor, CommandInitVar, CommandMappigJson, CommandSql } from "@src/constuctor.module/constuctor.interface";
 
 import { bdService } from "@src/bd.module/bd.module";
 import { fileService } from "@src/file.module/file.module";
 import { storeConfigService } from "@src/store.module/store.module";
 import { jsonService } from "@src/json.module/json.module";
+import { loggerService } from "@src/logger.module/logger.module";
+import { forService } from "@src/for.module/for.module";
 
 class ConstuctorService {
     private async convertFileConig(commandFileConfig: CommandFileConfig, commandList: Command[], index: number) {
@@ -14,10 +16,12 @@ class ConstuctorService {
     }
 
     public async runConfig(commandList: Command[]) {
+        loggerService.info("запуск команды");
         for (const [index, command] of commandList.entries()) {
             let resultCommand = null;
             switch (command.action) {
                 case CommandAction.FILE_CONFIG: // файл конфиг
+                    loggerService.info("Выполнено копирования конфига", [{ config: command }]);
                     await this.convertFileConig(command as CommandFileConfig, commandList, index);
                     break;
 
@@ -35,6 +39,7 @@ class ConstuctorService {
                     const commandFileRead = command as CommandFileRead;
                     const pathFileRead = storeConfigService.getElementStoreConfigConstructor(commandFileRead.path) as string;
                     resultCommand = await fileService.readFile(pathFileRead);
+                    loggerService.info("Выполнено чтения файла", { config: command });
                     break;
 
                 case CommandAction.FILE_WRITE: // запись файла
@@ -48,6 +53,8 @@ class ConstuctorService {
                     const commandDirectoryFile = command as CommandDirectoryFile;
                     const pathDirectoryFile = storeConfigService.getElementStoreConfigConstructor(commandDirectoryFile.path);
                     resultCommand = await fileService.directoryFile(pathDirectoryFile);
+                    loggerService.info("Выполнено получения путей файлов в каталоге", { config: commandDirectoryFile, result: resultCommand });
+                    break;
 
                 case CommandAction.MAPPING_JSON: // парсинг json в др формат json
                     const commandMappingJson = command as CommandMappigJson;
@@ -58,6 +65,11 @@ class ConstuctorService {
                 case CommandAction.INIT_VAR: // иницилизация переменной
                     const commandInitVar = command as CommandInitVar;
                     resultCommand = storeConfigService.getElementStoreConfigConstructor(commandInitVar.initVar);
+                    break;
+
+                case CommandAction.FOR: // вызвать цикл
+                    const commandFor = command as CommandFor;
+                    await forService.for(commandFor);
                     break;
             }
             storeConfigService.setStore(command.name, resultCommand, command.result);

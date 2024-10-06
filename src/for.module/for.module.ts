@@ -1,1 +1,1 @@
-import { forService } from "@src/for.module/for.service"
+export { forService } from "@src/for.module/for.service"
