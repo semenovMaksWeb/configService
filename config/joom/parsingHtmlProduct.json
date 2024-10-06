@@ -66,7 +66,7 @@
                             "convert": null
                         },
                         "selector": {
-                            "store": ".cell___ixESO",
+                            "const": ".cell___ixESO",
                             "convert": null
                         }
                     }
@@ -77,10 +77,7 @@
                     "action": "for",
                     "result": "null",
                     "for": {
-                        "item": {
-                            "store": "productDom",
-                            "convert": null
-                        },
+                        "item": "productDom",
                         "array": {
                             "store": "productDomList",
                             "convert": null
@@ -88,6 +85,7 @@
                         "config": [
                             {
                                 "name": "productObject",
+                                "result": "=",
                                 "comment": "Создать пустой объект в который будет записывать результат сохранения конвертации",
                                 "action": "initVar",
                                 "initVar": {
@@ -109,7 +107,7 @@
                                         "convert": null
                                     },
                                     "selector": {
-                                        "store": ".name___asFfu",
+                                        "const": ".name___asFfu",
                                         "convert": null
                                     }
                                 }
@@ -128,7 +126,7 @@
                                         "convert": null
                                     },
                                     "selector": {
-                                        "store": ".price___Vlu0y span:not(.hidden___pmcai)",
+                                        "const": ".price___Vlu0y span:not(.hidden___pmcai)",
                                         "convert": null
                                     }
                                 }
@@ -151,7 +149,7 @@
                                         "convert": null
                                     },
                                     "selector": {
-                                        "store": ".price___Vlu0y span:not(.hidden___pmcai)",
+                                        "const": ".price___Vlu0y span:not(.hidden___pmcai)",
                                         "convert": null
                                     }
                                 }
@@ -170,6 +168,25 @@
                     }
                 }
             ]
+        }
+    },
+    {
+        "name": "saveJsonFile",
+        "comment": "Сохранить json в файл",
+        "action": "fileWrite",
+        "fileWrite": {
+            "path": {
+                "const": "./media/joom/dataset_out/product.json",
+                "convert": {
+                    "type": "string"
+                }
+            },
+            "data": {
+                "store": "productList",
+                "convert": {
+                    "type": "string"
+                }
+            }
         }
     }
 ]

@@ -92,8 +92,9 @@ class ConstuctorService {
                 case CommandAction.GET_INNER_HTML: // из dom-element получить его содержимое
                     const commandGetInnerHtml = command as CommandGetInnerHtml;
                     const htmlGetInnerHtml = storeConfigService.getElementStoreConfigConstructor(commandGetInnerHtml.getInnerHtml.html);
-                    const selectorGetInnerHtml = storeConfigService.getElementStoreConfigConstructor(commandGetInnerHtml.getInnerHtml.html);
-                    resultCommand = await htmlService.getInnerHtml(htmlGetInnerHtml, selectorGetInnerHtml);
+                    const selectorGetInnerHtml = storeConfigService.getElementStoreConfigConstructor(commandGetInnerHtml.getInnerHtml.selector);
+                    loggerService.info("Получения текста с html", { config: commandGetInnerHtml, result: resultCommand, params: { htmlGetInnerHtml, selectorGetInnerHtml } })
+                    resultCommand = await htmlService.getInnerHtml(selectorGetInnerHtml, htmlGetInnerHtml);
                     break;
 
                 case CommandAction.GET_INNER_HTML: // из dom-element получить его содержимое
