@@ -5,6 +5,7 @@ export const loggerService = createLogger({
         new transports.Console({
             format: format.combine(
                 format.colorize(),
+                format.timestamp(),
                 format.printf(({ timestamp, level, message, metadata }) => {
                     return `[${timestamp}] ${level}: ${message}. ${JSON.stringify(
                         metadata
