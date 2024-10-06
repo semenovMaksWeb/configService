@@ -77,9 +77,34 @@ export interface CommandFor extends Command {
     }
 }
 
+type CommandHtml = {
+    html: StoreConfigElement,
+    selector: StoreConfigElement
+}
+
+type CommandHtmlGetAtr = CommandHtml & { nameArt: StoreConfigElement }
+
 export interface CommandMappigJson extends Command {
     mappingJson: {
         json: StoreConfigElement,
         schema: JsonMappingSchema[]
+    }
+}
+
+export interface CommandFindElementHtmlAll extends Command {
+    findElementHtmlAll: CommandHtml
+}
+
+export interface CommandGetInnerHtml extends Command {
+    getInnerHtml: CommandHtml
+}
+
+export interface CommandGetAtrHtml extends Command {
+    getAtrHtml: CommandHtmlGetAtr
+}
+
+export interface CommandConvertInDom extends Command {
+    convertInDom: {
+        html: StoreConfigElement
     }
 }

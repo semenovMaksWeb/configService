@@ -1,4 +1,4 @@
-import { Command, CommandAction, CommandConnectionDatabase, CommandDirectoryFile, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFor, CommandInitVar, CommandMappigJson, CommandSql } from "@src/constuctor.module/constuctor.interface";
+import { Command, CommandAction, CommandConnectionDatabase, CommandConvertInDom, CommandDirectoryFile, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFindElementHtmlAll, CommandFor, CommandGetAtrHtml, CommandGetInnerHtml, CommandInitVar, CommandMappigJson, CommandSql } from "@src/constuctor.module/constuctor.interface";
 
 import { bdService } from "@src/bd.module/bd.module";
 import { fileService } from "@src/file.module/file.module";
@@ -6,6 +6,7 @@ import { storeConfigService } from "@src/store.module/store.module";
 import { jsonService } from "@src/json.module/json.module";
 import { loggerService } from "@src/logger.module/logger.module";
 import { forService } from "@src/for.module/for.module";
+import { htmlService } from "@src/html.module/html.service";
 
 class ConstuctorService {
     private async convertFileConig(commandFileConfig: CommandFileConfig, commandList: Command[], index: number) {
@@ -70,6 +71,37 @@ class ConstuctorService {
                 case CommandAction.FOR: // вызвать цикл
                     const commandFor = command as CommandFor;
                     await forService.for(commandFor);
+                    break;
+
+
+                case CommandAction.CONVERT_IN_DOM: // из строки в html
+                    const commandConvertInDom = command as CommandConvertInDom;
+                    const htmlConvertInDom = storeConfigService.getElementStoreConfigConstructor(commandConvertInDom.convertInDom.html);
+                    resultCommand = htmlService.convertStringInDom(htmlConvertInDom);
+                    loggerService.info("выполнена конвертация из строки в html", { config: commandConvertInDom, result: resultCommand })
+                    break;
+
+                case CommandAction.FIND_ELEMENT_HTML_ALL: // из строки в html
+                    const commandFindElementHtmlAll = command as CommandFindElementHtmlAll;
+                    const htmlFindElementAll = storeConfigService.getElementStoreConfigConstructor(commandFindElementHtmlAll.findElementHtmlAll.html);
+                    const selectorFindElementAll = storeConfigService.getElementStoreConfigConstructor(commandFindElementHtmlAll.findElementHtmlAll.selector);
+                    loggerService.info("выполнен поиск списка элемента в html", { config: commandFindElementHtmlAll, result: resultCommand, params: { htmlFindElementAll, selectorFindElementAll } })
+                    resultCommand = await htmlService.findElementHtmlAll(htmlFindElementAll, selectorFindElementAll);
+                    break;
+
+                case CommandAction.GET_INNER_HTML: // из dom-element получить его содержимое
+                    const commandGetInnerHtml = command as CommandGetInnerHtml;
+                    const htmlGetInnerHtml = storeConfigService.getElementStoreConfigConstructor(commandGetInnerHtml.getInnerHtml.html);
+                    const selectorGetInnerHtml = storeConfigService.getElementStoreConfigConstructor(commandGetInnerHtml.getInnerHtml.html);
+                    resultCommand = await htmlService.getInnerHtml(htmlGetInnerHtml, selectorGetInnerHtml);
+                    break;
+
+                case CommandAction.GET_INNER_HTML: // из dom-element получить его содержимое
+                    const commandGetAtrHtml = command as CommandGetAtrHtml;
+                    const htmlGetAtrHtml = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.html);
+                    const selectorGetAtrHtml = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.html);
+                    const nameAtrGetAtrHtml = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.html);
+                    resultCommand = await htmlService.getAtrHtml(htmlGetAtrHtml, nameAtrGetAtrHtml, selectorGetAtrHtml);
                     break;
             }
             storeConfigService.setStore(command.name, resultCommand, command.result);
