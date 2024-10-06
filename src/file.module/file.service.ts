@@ -7,8 +7,12 @@ class FileService {
     }
 
     async writeFile(path: string, data: string) {
-        console.log(data);        
         await fs.writeFile(path, data);
+    }
+    async directoryFile(path: string) {
+        return (await fs.readdir(path)).map((filePath: string) => {
+            return `${path}/${filePath}`
+        });
     }
 }
 
