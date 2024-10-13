@@ -20,8 +20,10 @@ export enum CommandAction {
     CONVERT_IN_DOM = "convertInDom", // команда из строки в dom-element
     FIND_ELEMENT_HTML_ALL = "findElementHtmlAll", // найти в html все element по selector
     GET_INNER_HTML = "getInnerHtml", // получить текст и html с dom-element
-    GET_ATR_HTML = "getAtrHtml" // получить атрибут с dom-element
+    GET_ATR_HTML = "getAtrHtml", // получить атрибут с dom-element
 
+    CONVERT_VALID_STRING = "convertValidString", // убрать лишние пробелы и переносы из строки
+    CONVERT_REPLACE_ALL = "convertReplaceAll"
 }
 
 export enum CommandResultOperator {
@@ -36,6 +38,20 @@ export interface Command {
     name: string | string[];
     comment: string | null,
     copyResult?: boolean;
+}
+
+export interface CommandReplaceAll extends Command {
+    convertReplaceAll: {
+        string: StoreConfigElement,
+        searchString: StoreConfigElement,
+        replaceString: StoreConfigElement,
+    }
+}
+
+export interface CommandConvertValidString extends Command {
+    convertValidString: {
+        string: StoreConfigElement
+    }
 }
 
 export interface CommandInitVar extends Command {

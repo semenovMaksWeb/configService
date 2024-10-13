@@ -27,9 +27,7 @@
         "for": {
             "item": "fileItem",
             "array": {
-                "store": [
-                    "fileList"
-                ],
+                "store": "fileList",
                 "convert": null
             },
             "config": [
@@ -115,6 +113,24 @@
                             {
                                 "name": [
                                     "productObject",
+                                    "name"
+                                ],
+                                "result": "=",
+                                "action": "convertValidString",
+                                "comment": "Убрать лишние пробелы и переносы",
+                                "convertValidString": {
+                                    "string": {
+                                        "store": [
+                                            "productObject",
+                                            "name"
+                                        ],
+                                        "convert": null
+                                    }
+                                }
+                            },
+                            {
+                                "name": [
+                                    "productObject",
                                     "price"
                                 ],
                                 "comment": "Сохранения цены продукта в объект",
@@ -128,6 +144,47 @@
                                     "selector": {
                                         "const": ".price___Vlu0y span:not(.hidden___pmcai)",
                                         "convert": null
+                                    }
+                                }
+                            },
+                            {
+                                "name": [
+                                    "productObject",
+                                    "price"
+                                ],
+                                "action": "convertReplaceAll",
+                                "result": "=",
+                                "comment": "Убрать лишние символы с цены",
+                                "convertReplaceAll": {
+                                    "string": {
+                                        "store": [
+                                            "productObject",
+                                            "price"
+                                        ]
+                                    },
+                                    "searchString": {
+                                        "const": "&nbsp;₽"
+                                    },
+                                    "replaceString": {
+                                        "const": ""
+                                    }
+                                }
+                            },
+                            {
+                                "name": [
+                                    "productObject",
+                                    "price"
+                                ],
+                                "action": "initVar",
+                                "result": "=",
+                                "comment": "из строки в число",
+                                "initVar": {
+                                    "store": [
+                                        "productObject",
+                                        "price"
+                                    ],
+                                    "convert": {
+                                        "type": "number"
                                     }
                                 }
                             },

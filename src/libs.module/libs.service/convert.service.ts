@@ -42,6 +42,14 @@ class ConvertService {
         }
         return value;
     }
+
+    convertReplaceAll(value: string, searchString: string, replaceString: string) {
+        return value.replaceAll(searchString, replaceString);
+    }
+
+    convertValidString(value: string) {
+        return value.replace(/\s{2,}/g, ' ')
+    }
 }
 
 export const convertService = new ConvertService();

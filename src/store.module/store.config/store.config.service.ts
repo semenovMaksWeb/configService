@@ -30,7 +30,7 @@ class StoreConfigService {
     }
 
     private getElementStoreConfig(storeConfig: StoreConfigElement) {
-        if (storeConfig.const) {
+        if (storeConfig.const !== undefined) {
             return storeConfig.const;
         }
 
