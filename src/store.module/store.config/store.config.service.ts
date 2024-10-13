@@ -1,8 +1,9 @@
-import { CommandResultOperator } from "@src/constuctor.module/constuctor.interface";
-import { convertService } from "@src/libs.module/libs.module";
 import { StoreConfig, StoreConfigElement } from "@src/store.module/store.config/store.config.interface";
 import { Store } from "@src/store.module/store.interface";
 import { storeService } from "@src/store.module/store.service";
+
+import { Command, CommandResultOperator } from "@src/constuctor.module/constuctor.module";
+import { convertService } from "@src/libs.module/libs.module";
 
 class StoreConfigService {
     public getStoreConfigObject(storeConfigList: StoreConfig[]) {
@@ -46,16 +47,27 @@ class StoreConfigService {
         }
     }
 
-    public setStore(key: string | string[], value: any, commandResultOperator: CommandResultOperator) {
-        switch (commandResultOperator) {
+    public setStore(command: Command, value: any, key: string | string[]) {
+        switch (command.result) {
             case CommandResultOperator.EQUALLY:
                 Array.isArray(key) ? storeService.setPathStore(key, value) : storeService.setStore(key, value);
                 break
 
             case CommandResultOperator.PUSH:
-                Array.isArray(key) ? storeService.pushPathStore(key, value) : storeService.pushStore(key, value);
+                this.setStorePush(key, value, command);
                 break;
         }
+    }
+
+    private setStorePush(key: string | string[], value: any, command: Command) {
+        if (command.copyResult) {
+            value = JSON.parse(JSON.stringify(value));
+        }
+        if (Array.isArray(key)) {
+            storeService.pushPathStore(key, value);
+            return;
+        }
+        storeService.pushStore(key, value);
     }
 }
 

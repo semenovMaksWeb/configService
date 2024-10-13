@@ -105,7 +105,7 @@ class ConstuctorService {
                     resultCommand = htmlService.getAtrHtml(htmlGetAtrHtml, nameAtrGetAtrHtml, selectorGetAtrHtml);
                     break;
             }
-            storeConfigService.setStore(command.name, resultCommand, command.result);
+            storeConfigService.setStore(command, resultCommand, command.name);
         }
     }
 }

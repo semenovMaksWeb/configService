@@ -1,4 +1,3 @@
-import { CommandResultOperator } from "@src/constuctor.module/constuctor.interface";
 import { CommandFor, constuctorService } from "@src/constuctor.module/constuctor.module";
 import { storeConfigService } from "@src/store.module/store.module";
 
@@ -6,7 +5,7 @@ class ForService {
     async for(commandFor: CommandFor) {
         const array = storeConfigService.getElementStoreConfigConstructor(commandFor.for.array);
         for (const element of array) {
-            storeConfigService.setStore(commandFor.for.item, element, CommandResultOperator.EQUALLY);
+            storeConfigService.setStore(commandFor, element, commandFor.for.item);
             await constuctorService.runConfig(commandFor.for.config);
         }
     }

@@ -23,7 +23,7 @@
         "name": "forElementFile",
         "comment": "Прогнать в цикле файлы указанные в for.array",
         "action": "for",
-        "result": "null",
+        "result": "=",
         "for": {
             "item": "fileItem",
             "array": {
@@ -75,7 +75,7 @@
                     "name": "forElementDom",
                     "comment": "Прогнать в цикле dom element продуктов указанные в for.array",
                     "action": "for",
-                    "result": "null",
+                    "result": "=",
                     "for": {
                         "item": "productDom",
                         "array": {
@@ -149,19 +149,20 @@
                                         "convert": null
                                     },
                                     "selector": {
-                                        "const": ".price___Vlu0y span:not(.hidden___pmcai)",
+                                        "const": ".image___ZMfjN.image___sRDi6.contain___AWtW_.multiply___SN11z",
                                         "convert": null
                                     }
                                 }
                             },
                             {
                                 "name": "productList",
+                                "copyResult": true,
                                 "action": "initVar",
                                 "comment": "Сохранения объекта в массив результата",
                                 "result": "push",
                                 "initVar": {
                                     "store": "productObject",
-                                    "convert": null
+                                    "convert": "object"
                                 }
                             }
                         ]

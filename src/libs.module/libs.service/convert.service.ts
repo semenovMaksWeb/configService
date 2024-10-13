@@ -14,7 +14,6 @@ class ConvertService {
                 if (Array.isArray(value)) {
                     value = JSON.stringify(value);
                 }
-                return value;
                 break;
             }
             case TypeVarEnum.number: {

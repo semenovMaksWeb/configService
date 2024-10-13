@@ -34,7 +34,8 @@ export interface Command {
     action: CommandAction,
     result: CommandResultOperator,
     name: string | string[];
-    comment: string | null
+    comment: string | null,
+    copyResult?: boolean;
 }
 
 export interface CommandInitVar extends Command {
