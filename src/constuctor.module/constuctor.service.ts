@@ -97,12 +97,12 @@ class ConstuctorService {
                     loggerService.info("Получения текста с html", { config: commandGetInnerHtml, result: resultCommand, params: { htmlGetInnerHtml, selectorGetInnerHtml } })
                     break;
 
-                case CommandAction.GET_INNER_HTML: // из dom-element получить его содержимое
+                case CommandAction.GET_ATR_HTML: // из dom-element получить атрибут
                     const commandGetAtrHtml = command as CommandGetAtrHtml;
                     const htmlGetAtrHtml = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.html);
-                    const selectorGetAtrHtml = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.html);
-                    const nameAtrGetAtrHtml = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.html);
-                    resultCommand = htmlService.getAtrHtml(htmlGetAtrHtml, nameAtrGetAtrHtml, selectorGetAtrHtml);
+                    const selectorGetAtrHtml = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.selector);
+                    const nameAtrGetAtrHtml = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.nameArt);
+                    resultCommand = htmlService.getAtrHtml(selectorGetAtrHtml, nameAtrGetAtrHtml, htmlGetAtrHtml);
                     break;
             }
             storeConfigService.setStore(command, resultCommand, command.name);
