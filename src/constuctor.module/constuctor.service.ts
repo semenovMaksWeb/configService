@@ -1,4 +1,4 @@
-import { Command, CommandAction, CommandConnectionDatabase, CommandConvertInDom, CommandDirectoryFile, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFindElementHtmlAll, CommandFor, CommandGetAtrHtml, CommandGetInnerHtml, CommandInitVar, CommandMappigJson, CommandSql } from "@src/constuctor.module/constuctor.interface";
+import { Command, CommandAction, CommandConnectionDatabase, CommandConvertInDom, CommandConvertValidString, CommandDirectoryFile, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFindElementHtmlAll, CommandFor, CommandGetAtrHtml, CommandGetInnerHtml, CommandInitVar, CommandMappigJson, CommandReplaceAll, CommandSql } from "@src/constuctor.module/constuctor.interface";
 
 import { bdService } from "@src/bd.module/bd.module";
 import { fileService } from "@src/file.module/file.module";
@@ -7,6 +7,7 @@ import { jsonService } from "@src/json.module/json.module";
 import { loggerService } from "@src/logger.module/logger.module";
 import { forService } from "@src/for.module/for.module";
 import { htmlService } from "@src/html.module/html.service";
+import { convertService } from "@src/libs.module/libs.module";
 
 class ConstuctorService {
     private async convertFileConig(commandFileConfig: CommandFileConfig, commandList: Command[], index: number) {
@@ -16,95 +17,194 @@ class ConstuctorService {
         commandList.splice(index + 1, 0, ...jsonConfig);
     }
 
+    // файл конфиг копирование
+    private async fileConfig(command: Command, commandList: Command[], index: number) {
+        loggerService.info("Выполнено копирования конфига", [{ config: command }]);
+        await this.convertFileConig(command as CommandFileConfig, commandList, index);
+    }
+
+    // подключение к бд
+    private connectionDatabase(command: Command) {
+        const commandConnectionDatabase = command as CommandConnectionDatabase;
+        return bdService.connectionDatabase(commandConnectionDatabase.connection);
+    }
+
+    // вызов sql функции
+    private async sqlCall(command: Command) {
+        const commandSql = command as CommandSql;
+        return await bdService.sqlCall(commandSql);
+    }
+
+    // чтения файла
+    private async readFile(command: Command) {
+        const commandFileRead = command as CommandFileRead;
+        const path = storeConfigService.getElementStoreConfigConstructor(commandFileRead.path) as string;
+        const result = await fileService.readFile(path);
+        loggerService.info("Выполнено чтения файла", { config: command });
+        return result;
+    }
+
+    // запись в файл
+    private async writeFile(command: Command) {
+        const commandFileWrite = command as CommandFileWrite;
+        const path = storeConfigService.getElementStoreConfigConstructor(commandFileWrite.fileWrite.path);
+        const data = storeConfigService.getElementStoreConfigConstructor(commandFileWrite.fileWrite.data);
+        await fileService.writeFile(path, data);
+        loggerService.info("Выполнено записи файла", { config: command });
+    }
+
+    // чтение файлов в каталоге
+    private async directoryFile(command: Command) {
+        const commandDirectoryFile = command as CommandDirectoryFile;
+        const path = storeConfigService.getElementStoreConfigConstructor(commandDirectoryFile.path);
+        const result = await fileService.directoryFile(path);
+        loggerService.info("Выполнено получения путей файлов в каталоге", { config: commandDirectoryFile, result });
+        return result;
+    }
+
+    // парсинг json в др формат json
+    private mappingJson(command: Command) {
+        const commandMappingJson = command as CommandMappigJson;
+        const json = storeConfigService.getElementStoreConfigConstructor(commandMappingJson.mappingJson.json);
+        return jsonService.mappingJson(json, commandMappingJson.mappingJson.schema);
+    }
+
+    // иницилизация или изменение переменной
+    private initVar(command: Command) {
+        const commandInitVar = command as CommandInitVar;
+        return storeConfigService.getElementStoreConfigConstructor(commandInitVar.initVar);
+    }
+
+    // вызвать цикл
+    private async for(command: Command) {
+        const commandFor = command as CommandFor;
+        await forService.for(commandFor);
+    }
+
+    // из строки в dom
+    private convertInDom(command: Command) {
+        const commandConvertInDom = command as CommandConvertInDom;
+        const html = storeConfigService.getElementStoreConfigConstructor(commandConvertInDom.convertInDom.html);
+        const result = htmlService.convertStringInDom(html);
+        loggerService.info("выполнена конвертация из строки в html", { config: commandConvertInDom, result });
+        return result;
+    }
+
+    // найди множество элементов по selector
+    private findElementHtmlAll(command: Command) {
+        const commandFindElementHtmlAll = command as CommandFindElementHtmlAll;
+        const html = storeConfigService.getElementStoreConfigConstructor(commandFindElementHtmlAll.findElementHtmlAll.html);
+        const selector = storeConfigService.getElementStoreConfigConstructor(commandFindElementHtmlAll.findElementHtmlAll.selector);
+        const result = htmlService.findElementHtmlAll(selector, html);
+        loggerService.info("выполнен поиск списка элемента в html", { config: commandFindElementHtmlAll, params: { html, selector } })
+        return result;
+    }
+
+    // из dom-element получить его содержимое
+    private getInnerHtml(command: Command) {
+        const commandGetInnerHtml = command as CommandGetInnerHtml;
+        const html = storeConfigService.getElementStoreConfigConstructor(commandGetInnerHtml.getInnerHtml.html);
+        const selector = storeConfigService.getElementStoreConfigConstructor(commandGetInnerHtml.getInnerHtml.selector);
+        const result = htmlService.getInnerHtml(selector, html);
+        loggerService.info("Получения текста с html", { config: commandGetInnerHtml, result, params: { html, selector } })
+        return result;
+    }
+
+    // из dom-element получить атрибут
+    private getAtrHtml(command: Command) {
+        const commandGetAtrHtml = command as CommandGetAtrHtml;
+        const html = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.html);
+        const selector = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.selector);
+        const nameAtr = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.nameArt);
+        return htmlService.getAtrHtml(selector, nameAtr, html);
+    }
+
+    //убрать из строки переносы и множ. пробелы CONVERT_VALID_STRING
+    private convertValidString(command: Command) {
+        const commandConvertValidString = command as CommandConvertValidString;
+        const string = storeConfigService.getElementStoreConfigConstructor(commandConvertValidString.convertValidString.string);
+        const result = convertService.convertValidString(string);
+        loggerService.info("Конвертация строки скрытие лишних переносов пробелов и табуляции");
+        return result;
+    }
+
+    // поиск с заменой символов в строке
+    private convertReplaceAll(command: Command) {
+        const commandConvertReplaceAll = command as CommandReplaceAll;
+        const string = storeConfigService.getElementStoreConfigConstructor(commandConvertReplaceAll.convertReplaceAll.string);
+        const searchString = storeConfigService.getElementStoreConfigConstructor(commandConvertReplaceAll.convertReplaceAll.searchString);
+        const replaceString = storeConfigService.getElementStoreConfigConstructor(commandConvertReplaceAll.convertReplaceAll.replaceString);
+        loggerService.info("Замена символов в строке", {config: commandConvertReplaceAll.convertReplaceAll, name: command.name});
+        const result = convertService.convertReplaceAll(string, searchString, replaceString);
+        return result;
+    }
+
     public async runConfig(commandList: Command[]) {
         loggerService.info("запуск команды");
         for (const [index, command] of commandList.entries()) {
             let resultCommand = null;
             switch (command.action) {
-                case CommandAction.FILE_CONFIG: // файл конфиг
-                    loggerService.info("Выполнено копирования конфига", [{ config: command }]);
-                    await this.convertFileConig(command as CommandFileConfig, commandList, index);
+                case CommandAction.FILE_CONFIG: // файл конфиг копирование
+                    await this.fileConfig(command, commandList, index);
                     break;
 
                 case CommandAction.CONNECTION_DATABASE: // подключение к бд
-                    const commandConnectionDatabase = command as CommandConnectionDatabase;
-                    resultCommand = bdService.connectionDatabase(commandConnectionDatabase.connection);
+                    resultCommand = this.connectionDatabase(command);
                     break;
 
                 case CommandAction.SQL_CALL: // вызов sql функции
-                    const commandSql = command as CommandSql;
-                    resultCommand = await bdService.sqlCall(commandSql);
+                    resultCommand = await this.sqlCall(command)
                     break;
 
                 case CommandAction.FILE_READ: // чтения файла
-                    const commandFileRead = command as CommandFileRead;
-                    const pathFileRead = storeConfigService.getElementStoreConfigConstructor(commandFileRead.path) as string;
-                    resultCommand = await fileService.readFile(pathFileRead);
-                    loggerService.info("Выполнено чтения файла", { config: command });
+                    resultCommand = await this.readFile(command);
                     break;
 
                 case CommandAction.FILE_WRITE: // запись файла
-                    const commandFileWrite = command as CommandFileWrite;
-                    const pathFileWrite = storeConfigService.getElementStoreConfigConstructor(commandFileWrite.fileWrite.path);
-                    const dataFileWrite = storeConfigService.getElementStoreConfigConstructor(commandFileWrite.fileWrite.data);
-                    await fileService.writeFile(pathFileWrite, dataFileWrite);
+                    await this.writeFile(command);
                     break;
 
                 case CommandAction.DIRECTORY_FILE: // чтения путей в файлов в каталоге
-                    const commandDirectoryFile = command as CommandDirectoryFile;
-                    const pathDirectoryFile = storeConfigService.getElementStoreConfigConstructor(commandDirectoryFile.path);
-                    resultCommand = await fileService.directoryFile(pathDirectoryFile);
-                    loggerService.info("Выполнено получения путей файлов в каталоге", { config: commandDirectoryFile, result: resultCommand });
+                    resultCommand = await this.directoryFile(command);
                     break;
 
                 case CommandAction.MAPPING_JSON: // парсинг json в др формат json
-                    const commandMappingJson = command as CommandMappigJson;
-                    const dataJsonMapping = storeConfigService.getElementStoreConfigConstructor(commandMappingJson.mappingJson.json);
-                    resultCommand = jsonService.mappingJson(dataJsonMapping, commandMappingJson.mappingJson.schema);
+                    resultCommand = this.mappingJson(command);
                     break;
 
                 case CommandAction.INIT_VAR: // иницилизация переменной
-                    const commandInitVar = command as CommandInitVar;
-                    resultCommand = storeConfigService.getElementStoreConfigConstructor(commandInitVar.initVar);
+                    resultCommand = this.initVar(command);
                     break;
 
                 case CommandAction.FOR: // вызвать цикл
-                    const commandFor = command as CommandFor;
-                    await forService.for(commandFor);
+                    await this.for(command);
                     break;
-
 
                 case CommandAction.CONVERT_IN_DOM: // из строки в html
-                    const commandConvertInDom = command as CommandConvertInDom;
-                    const htmlConvertInDom = storeConfigService.getElementStoreConfigConstructor(commandConvertInDom.convertInDom.html);
-                    resultCommand = htmlService.convertStringInDom(htmlConvertInDom);
-                    loggerService.info("выполнена конвертация из строки в html", { config: commandConvertInDom, result: resultCommand })
+                    resultCommand = this.convertInDom(command);
                     break;
 
-                case CommandAction.FIND_ELEMENT_HTML_ALL: // из строки в html
-                    const commandFindElementHtmlAll = command as CommandFindElementHtmlAll;
-                    const htmlFindElementAll = storeConfigService.getElementStoreConfigConstructor(commandFindElementHtmlAll.findElementHtmlAll.html);
-                    const selectorFindElementAll = storeConfigService.getElementStoreConfigConstructor(commandFindElementHtmlAll.findElementHtmlAll.selector);
-                    loggerService.info("выполнен поиск списка элемента в html", { config: commandFindElementHtmlAll, result: resultCommand, params: { htmlFindElementAll, selectorFindElementAll } })
-                    resultCommand = htmlService.findElementHtmlAll(selectorFindElementAll, htmlFindElementAll);
+                case CommandAction.FIND_ELEMENT_HTML_ALL: // найди множество элементов по selector
+                    resultCommand = this.findElementHtmlAll(command);
                     break;
 
                 case CommandAction.GET_INNER_HTML: // из dom-element получить его содержимое
-                    const commandGetInnerHtml = command as CommandGetInnerHtml;
-                    const htmlGetInnerHtml = storeConfigService.getElementStoreConfigConstructor(commandGetInnerHtml.getInnerHtml.html);
-                    const selectorGetInnerHtml = storeConfigService.getElementStoreConfigConstructor(commandGetInnerHtml.getInnerHtml.selector);
-                    resultCommand = htmlService.getInnerHtml(selectorGetInnerHtml, htmlGetInnerHtml);
-                    loggerService.info("Получения текста с html", { config: commandGetInnerHtml, result: resultCommand, params: { htmlGetInnerHtml, selectorGetInnerHtml } })
+                    resultCommand = this.getInnerHtml(command);
                     break;
 
                 case CommandAction.GET_ATR_HTML: // из dom-element получить атрибут
-                    const commandGetAtrHtml = command as CommandGetAtrHtml;
-                    const htmlGetAtrHtml = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.html);
-                    const selectorGetAtrHtml = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.selector);
-                    const nameAtrGetAtrHtml = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.nameArt);
-                    resultCommand = htmlService.getAtrHtml(selectorGetAtrHtml, nameAtrGetAtrHtml, htmlGetAtrHtml);
+                    resultCommand = this.getAtrHtml(command);
+                    break;
+
+                case CommandAction.CONVERT_VALID_STRING: // убрать из строки переносы и множ. пробелы
+                    resultCommand = this.convertValidString(command);
+                    break;
+
+                case CommandAction.CONVERT_REPLACE_ALL: // поиск с заменой символов в строке
+                    resultCommand = this.convertReplaceAll(command);
                     break;
             }
+
             storeConfigService.setStore(command, resultCommand, command.name);
         }
     }

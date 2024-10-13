@@ -5,10 +5,11 @@
                 "./src/*"
             ]
         },
-        "target": "es2015",
+        "target": "es2021",
         "module": "commonjs",
         "lib": [
-            "es6"
+            "es6",
+            "ES2021"
         ],
         "allowJs": true,
         "outDir": "build",
