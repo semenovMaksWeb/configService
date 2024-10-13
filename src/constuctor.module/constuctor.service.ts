@@ -1,4 +1,4 @@
-import { Command, CommandAction, CommandConnectionDatabase, CommandConvertInDom, CommandConvertValidString, CommandDirectoryFile, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFindElementHtmlAll, CommandFor, CommandGetAtrHtml, CommandGetInnerHtml, CommandInitVar, CommandMappigJson, CommandReplaceAll, CommandSql } from "@src/constuctor.module/constuctor.interface";
+import { Command, CommandAction, CommandConnectionDatabase, CommandConvertInDom, CommandConvertValidString, CommandDirectoryFile, CommandDownloadFileHttp, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFindElementHtmlAll, CommandFor, CommandGetAtrHtml, CommandGetInnerHtml, CommandInitVar, CommandMappigJson, CommandReplaceAll, CommandSql } from "@src/constuctor.module/constuctor.interface";
 
 import { bdService } from "@src/bd.module/bd.module";
 import { fileService } from "@src/file.module/file.module";
@@ -134,9 +134,18 @@ class ConstuctorService {
         const string = storeConfigService.getElementStoreConfigConstructor(commandConvertReplaceAll.convertReplaceAll.string);
         const searchString = storeConfigService.getElementStoreConfigConstructor(commandConvertReplaceAll.convertReplaceAll.searchString);
         const replaceString = storeConfigService.getElementStoreConfigConstructor(commandConvertReplaceAll.convertReplaceAll.replaceString);
-        loggerService.info("Замена символов в строке", {config: commandConvertReplaceAll.convertReplaceAll, name: command.name});
+        loggerService.info("Замена символов в строке", { config: commandConvertReplaceAll.convertReplaceAll, name: command.name });
         const result = convertService.convertReplaceAll(string, searchString, replaceString);
         return result;
+    }
+
+    // скачать файл по http и сохранить 
+    private async downloadFileHttp(command: Command) {
+        const commandDownloadFileHttp = command as CommandDownloadFileHttp;
+        const url = storeConfigService.getElementStoreConfigConstructor(commandDownloadFileHttp.downloadFileHttp.url);
+        const path = storeConfigService.getElementStoreConfigConstructor(commandDownloadFileHttp.downloadFileHttp.path);
+        const fileName = storeConfigService.getElementStoreConfigConstructor(commandDownloadFileHttp.downloadFileHttp.fileName);
+        await fileService.downloadFileHttp(url, path, fileName);
     }
 
     public async runConfig(commandList: Command[]) {
@@ -202,6 +211,10 @@ class ConstuctorService {
 
                 case CommandAction.CONVERT_REPLACE_ALL: // поиск с заменой символов в строке
                     resultCommand = this.convertReplaceAll(command);
+                    break;
+
+                case CommandAction.DOWNLOAD_FILE_HTTP: // скачать файл по http и сохранить в файл
+                    await this.downloadFileHttp(command);
                     break;
             }
 

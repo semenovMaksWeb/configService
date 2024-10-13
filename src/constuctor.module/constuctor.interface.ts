@@ -23,7 +23,8 @@ export enum CommandAction {
     GET_ATR_HTML = "getAtrHtml", // получить атрибут с dom-element
 
     CONVERT_VALID_STRING = "convertValidString", // убрать лишние пробелы и переносы из строки
-    CONVERT_REPLACE_ALL = "convertReplaceAll"
+    CONVERT_REPLACE_ALL = "convertReplaceAll", // замена символов в строке
+    DOWNLOAD_FILE_HTTP = "downloadFileHttp",
 }
 
 export enum CommandResultOperator {
@@ -38,6 +39,14 @@ export interface Command {
     name: string | string[];
     comment: string | null,
     copyResult?: boolean;
+}
+
+export interface CommandDownloadFileHttp extends Command {
+    downloadFileHttp: {
+        path: StoreConfigElement,
+        url: StoreConfigElement,
+        fileName: StoreConfigElement,
+    }
 }
 
 export interface CommandReplaceAll extends Command {
