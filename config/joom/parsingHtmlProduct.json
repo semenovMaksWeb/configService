@@ -189,10 +189,7 @@
                                 }
                             },
                             {
-                                "name": [
-                                    "productObject",
-                                    "image"
-                                ],
+                                "name": "imageUrl",
                                 "comment": "Сохранения url изображения продукта в объект",
                                 "action": "getAtrHtml",
                                 "result": "=",
@@ -212,6 +209,26 @@
                                 }
                             },
                             {
+                                "name": [
+                                    "productObject",
+                                    "image"
+                                ],
+                                "comment": "Получить имя файла",
+                                "action": "convertReplaceAll",
+                                "result": "=",
+                                "convertReplaceAll": {
+                                    "string": {
+                                        "store": "imageUrl"
+                                    },
+                                    "searchString": {
+                                        "const": "https://img.joomcdn.net/"
+                                    },
+                                    "replaceString": {
+                                        "const": ""
+                                    }
+                                }
+                            },
+                            {
                                 "name": "dowloadFile",
                                 "action": "downloadFileHttp",
                                 "comment": "скачать и сохранить файл продукта на диск",
@@ -220,12 +237,14 @@
                                         "const": "./media/joom/dataset_out/img/"
                                     },
                                     "url": {
+                                        "store": "imageUrl"
+                                    },
+                                    "fileName": {
                                         "store": [
                                             "productObject",
                                             "image"
                                         ]
-                                    },
-                                    "fileName": {}
+                                    }
                                 }
                             },
                             {
