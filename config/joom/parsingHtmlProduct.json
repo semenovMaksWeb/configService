@@ -234,7 +234,7 @@
                                 "comment": "скачать и сохранить файл продукта на диск",
                                 "downloadFileHttp": {
                                     "path": {
-                                        "const": "./media/joom/dataset_out/img/"
+                                        "const": "./media/joom/dataset_out/img/product"
                                     },
                                     "url": {
                                         "store": "imageUrl"
