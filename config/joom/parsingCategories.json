@@ -81,7 +81,7 @@
                             ]
                         },
                         "searchString": {
-                            "const": "/\/(https:\/\/resources.joomcdn.net\/)|(https:\/\/upload.joomcdn.net\/)|(\/)\//gi",
+                            "const": "(https:\/\/resources.joomcdn.net\/)|(https:\/\/upload.joomcdn.net\/)|(\/)",
                             "convert": {
                                 "type": "RegExp",
                                 "regExpFlag": "gi"
