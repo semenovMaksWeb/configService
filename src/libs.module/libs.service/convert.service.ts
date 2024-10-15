@@ -1,9 +1,13 @@
 import { TypeVarEnum } from "@src/libs.module/list.type/libs.enum";
+import { StoreConvert } from "@src/store.module/store.config/store.config.interface";
 
 class ConvertService {
-    convertVar(value: any, type: TypeVarEnum | undefined) {
+    convertVar(value: any, convert: StoreConvert) {
+        if (!convert?.type) {
+            return value;
+        }
 
-        switch (type) {
+        switch (convert.type) {
             case undefined: {
                 break;
             }
@@ -39,6 +43,9 @@ class ConvertService {
                 }
                 break;
             }
+            case TypeVarEnum.RegExp:
+                value = new RegExp(value, convert.regExpFlag);
+                break;
         }
         return value;
     }

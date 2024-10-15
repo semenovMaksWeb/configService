@@ -5,9 +5,12 @@ export type StoreConfig = {
     const?: any,
     env?: string | string[],
     store?: string | string[],
-    convert: {
-        type: TypeVarEnum
-    } | null,
+    convert: StoreConvert
 }
+
+export type StoreConvert = {
+    type: TypeVarEnum,
+    regExpFlag?: string
+} | null
 
 export type StoreConfigElement = Omit<StoreConfig, "key">;

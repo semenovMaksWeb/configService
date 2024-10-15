@@ -4,5 +4,6 @@ export enum TypeVarEnum {
     number = "number",
     json = "json",
     null = "null",
-    array = "array"
+    array = "array",
+    RegExp = "RegExp"
 }
