@@ -1,3 +1,4 @@
+import { IfsRunConfig } from "@src/ifs.module/ifs.module";
 import { JsonMappingSchema } from "@src/json.module/json.module";
 import { StoreConfigElement } from "@src/store.module/store.module";
 import { StoreConfig } from "@src/store.module/store.module"
@@ -37,10 +38,11 @@ export enum CommandResultOperator {
 }
 
 export interface Command {
-    action: CommandAction,
-    result: CommandResultOperator,
+    ifs?: IfsRunConfig[];
+    action: CommandAction;
+    result: CommandResultOperator;
     name: string | string[];
-    comment: string | null,
+    comment: string | null;
     copyResult?: boolean;
 }
 

@@ -1,12 +1,12 @@
 import { StoreConfigElement } from "@src/store.module/store.module";
 
 export enum ifsOperator {
-    "==",
-    ">",
-    "<",
-    "!=",
-    "<=",
-    ">=",
+    "==" = "==",
+    ">" = ">",
+    "<" = "<",
+    "!=" = "!=",
+    "<=" = "<=",
+    ">=" = ">=",
 }
 
 export type OperatorAction = { [key in ifsOperator]: (a: any, b: any) => boolean }

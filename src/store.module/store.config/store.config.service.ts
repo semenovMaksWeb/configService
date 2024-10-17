@@ -70,14 +70,15 @@ class StoreConfigService {
         storeService.pushStore(key, value);
     }
 
-    saveBody(body: ConstuctorBody) {
+    saveBody(body?: ConstuctorBody) {
         if (!body) {
             return;
         }
+        storeService.setStore("body", {});
         for (const key in body) {
             if (Object.prototype.hasOwnProperty.call(body, key)) {
                 const element = body[key];
-                this.setStorePush(["body", key], element, undefined)
+                storeService.setPathStore(["body", key], element)
             }
         }
     }

@@ -16,20 +16,21 @@ class IfsService {
 
         while (copyConfig.length > 1) {
             let [value1, value2, value3] = copyConfig.splice(0, 3); // удалить конфиг и получить нужные значения
-            
-            const operator = value2 as OperatorConfig;
-            value1 = storeConfigService.getElementStoreConfigConstructor(value1 as StoreConfigElement);
-            value2 = storeConfigService.getElementStoreConfigConstructor(value3 as StoreConfigElement);
 
-            if (!operator) {
+            value1 = storeConfigService.getElementStoreConfigConstructor(value1 as StoreConfigElement);
+            value2 = value2 as OperatorConfig;
+            value3 = storeConfigService.getElementStoreConfigConstructor(value3 as StoreConfigElement);
+            
+            if (!value2.operator) {
                 throw new Error("Невалидный конфиг оператора не указан");
             }
 
-            const action = this.operatorAction[operator.operator as ifsOperator];
+            const action = this.operatorAction[value2.operator as ifsOperator];
             if (!action) {
-                throw new Error(`Неизвестный оператор: ${operator}`);
+                throw new Error(`Неизвестный оператор: ${value2.operator}`);
             }
-            const result = action(value1, value2) // вызов сравнения
+
+            const result = action(value1, value3) // вызов сравнения
             copyConfig.unshift(result);  // сохранение результата конфига
         }
 

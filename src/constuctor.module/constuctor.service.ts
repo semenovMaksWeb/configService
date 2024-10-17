@@ -8,6 +8,7 @@ import { loggerService } from "@src/logger.module/logger.module";
 import { forService } from "@src/for.module/for.module";
 import { htmlService } from "@src/html.module/html.service";
 import { convertService } from "@src/libs.module/libs.module";
+import { ifsService } from "@src/ifs.module/ifs.service";
 
 class ConstuctorService {
     private async convertFileConig(commandFileConfig: CommandFileConfig, commandList: Command[], index: number) {
@@ -148,10 +149,16 @@ class ConstuctorService {
         await fileService.downloadFileHttp(url, path, fileName);
     }
 
-    public async runConfig(commandList: Command[], body: ConstuctorBody) {
+    public async runConfig(commandList: Command[], body?: ConstuctorBody) {
         storeConfigService.saveBody(body);
         loggerService.info("запуск команды");
+
         for (const [index, command] of commandList.entries()) {
+
+            if (command.ifs && !ifsService.ifsRun(command.ifs)) {
+                continue;
+            }
+
             let resultCommand = null;
             switch (command.action) {
                 case CommandAction.FILE_CONFIG: // файл конфиг копирование
