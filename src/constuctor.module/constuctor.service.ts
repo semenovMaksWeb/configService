@@ -11,29 +11,31 @@ import { convertService } from "@src/libs.module/libs.module";
 import { ifsService } from "@src/ifs.module/ifs.service";
 
 class ConstuctorService {
-    private async convertFileConig(commandFileConfig: CommandFileConfig, commandList: Command[], index: number) {
+
+    // файл конфиг копирование
+    private async fileConfig(command: Command, commandList: Command[], index: number) {
+        const commandFileConfig = command as CommandFileConfig;
         const path = `${process.env.CONFIG_CATALOG}${commandFileConfig.path}`;
         const configFile = await fileService.readFile(path);
         const jsonConfig = JSON.parse(configFile.toString());
         commandList.splice(index + 1, 0, ...jsonConfig);
-    }
-
-    // файл конфиг копирование
-    private async fileConfig(command: Command, commandList: Command[], index: number) {
-        loggerService.info("Выполнено копирования конфига", [{ config: command }]);
-        await this.convertFileConig(command as CommandFileConfig, commandList, index);
+        loggerService.info("Выполнено копирования конфига", [{ config: { path: commandFileConfig.path, name: command.name } }]);
     }
 
     // подключение к бд
     private connectionDatabase(command: Command) {
         const commandConnectionDatabase = command as CommandConnectionDatabase;
-        return bdService.connectionDatabase(commandConnectionDatabase.connection);
+        const result = bdService.connectionDatabase(commandConnectionDatabase.connection);
+        loggerService.info("Выполнено подключение к бд", [{ config: { name: command.name, connection: commandConnectionDatabase.connection } }]);
+        return result;
     }
 
     // вызов sql функции
     private async sqlCall(command: Command) {
         const commandSql = command as CommandSql;
-        return await bdService.sqlCall(commandSql);
+        const result = await bdService.sqlCall(commandSql);
+        loggerService.info("Выполнен sql запрос", [{ config: { sql: commandSql.sql.query, name: command.name } }]);
+        return result;
     }
 
     // чтения файла
@@ -41,7 +43,7 @@ class ConstuctorService {
         const commandFileRead = command as CommandFileRead;
         const path = storeConfigService.getElementStoreConfigConstructor(commandFileRead.path) as string;
         const result = await fileService.readFile(path);
-        loggerService.info("Выполнено чтения файла", { config: command });
+        loggerService.info("Выполнено чтения файла", { config: { path: path, name: command.name } });
         return result;
     }
 
@@ -51,7 +53,7 @@ class ConstuctorService {
         const path = storeConfigService.getElementStoreConfigConstructor(commandFileWrite.fileWrite.path);
         const data = storeConfigService.getElementStoreConfigConstructor(commandFileWrite.fileWrite.data);
         await fileService.writeFile(path, data);
-        loggerService.info("Выполнено записи файла", { config: command });
+        loggerService.info("Выполнено записи файла", { config: { path: path, name: command.name } });
     }
 
     // чтение файлов в каталоге
@@ -59,7 +61,7 @@ class ConstuctorService {
         const commandDirectoryFile = command as CommandDirectoryFile;
         const path = storeConfigService.getElementStoreConfigConstructor(commandDirectoryFile.path);
         const result = await fileService.directoryFile(path);
-        loggerService.info("Выполнено получения путей файлов в каталоге", { config: commandDirectoryFile, result });
+        loggerService.info("Выполнено получения путей файлов в каталоге", { config: { path: path, name: command.name }, result });
         return result;
     }
 
@@ -67,19 +69,25 @@ class ConstuctorService {
     private mappingJson(command: Command) {
         const commandMappingJson = command as CommandMappigJson;
         const json = storeConfigService.getElementStoreConfigConstructor(commandMappingJson.mappingJson.json);
-        return jsonService.mappingJson(json, commandMappingJson.mappingJson.schema);
+        const result = jsonService.mappingJson(json, commandMappingJson.mappingJson.schema);
+        loggerService.info("Выполнено mapping json", { config: { name: command.name }, result });
+        return result;
     }
 
     // иницилизация или изменение переменной
     private initVar(command: Command) {
         const commandInitVar = command as CommandInitVar;
-        return storeConfigService.getElementStoreConfigConstructor(commandInitVar.initVar);
+        const result = storeConfigService.getElementStoreConfigConstructor(commandInitVar.initVar);
+        loggerService.info("Выполнена иницилизация переменной", { config: { name: command.name }, result });
+        return result;
     }
 
     // вызвать цикл
     private async for(command: Command) {
         const commandFor = command as CommandFor;
+        loggerService.info("Начался цикл", { config: { name: command.name } });
         await forService.for(commandFor);
+        loggerService.info("Закончился цикл", { config: { name: command.name } });
     }
 
     // из строки в dom
@@ -87,7 +95,7 @@ class ConstuctorService {
         const commandConvertInDom = command as CommandConvertInDom;
         const html = storeConfigService.getElementStoreConfigConstructor(commandConvertInDom.convertInDom.html);
         const result = htmlService.convertStringInDom(html);
-        loggerService.info("выполнена конвертация из строки в html", { config: commandConvertInDom, result });
+        loggerService.info("выполнена конвертация из строки в html", { config: { name: command.name } });
         return result;
     }
 
@@ -97,7 +105,7 @@ class ConstuctorService {
         const html = storeConfigService.getElementStoreConfigConstructor(commandFindElementHtmlAll.findElementHtmlAll.html);
         const selector = storeConfigService.getElementStoreConfigConstructor(commandFindElementHtmlAll.findElementHtmlAll.selector);
         const result = htmlService.findElementHtmlAll(selector, html);
-        loggerService.info("выполнен поиск списка элемента в html", { config: commandFindElementHtmlAll, params: { html, selector } })
+        loggerService.info("выполнен поиск списка элемента в html", { config: { name: command.name } })
         return result;
     }
 
@@ -107,7 +115,7 @@ class ConstuctorService {
         const html = storeConfigService.getElementStoreConfigConstructor(commandGetInnerHtml.getInnerHtml.html);
         const selector = storeConfigService.getElementStoreConfigConstructor(commandGetInnerHtml.getInnerHtml.selector);
         const result = htmlService.getInnerHtml(selector, html);
-        loggerService.info("Получения текста с html", { config: commandGetInnerHtml, result, params: { html, selector } })
+        loggerService.info("Получения текста с html", { config: { name: command.name }, result })
         return result;
     }
 
@@ -117,7 +125,9 @@ class ConstuctorService {
         const html = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.html);
         const selector = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.selector);
         const nameAtr = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.nameArt);
-        return htmlService.getAtrHtml(selector, nameAtr, html);
+        const result = htmlService.getAtrHtml(selector, nameAtr, html);
+        loggerService.info("Получения артибута с html", { config: { name: command.name }, result })
+        return result;
     }
 
     //убрать из строки переносы и множ. пробелы CONVERT_VALID_STRING
@@ -125,7 +135,7 @@ class ConstuctorService {
         const commandConvertValidString = command as CommandConvertValidString;
         const string = storeConfigService.getElementStoreConfigConstructor(commandConvertValidString.convertValidString.string);
         const result = convertService.convertValidString(string);
-        loggerService.info("Конвертация строки скрытие лишних переносов пробелов и табуляции");
+        loggerService.info("Конвертация строки скрытие лишних переносов пробелов и табуляции", { config: { name: command.name }, result });
         return result;
     }
 
@@ -135,7 +145,7 @@ class ConstuctorService {
         const string = storeConfigService.getElementStoreConfigConstructor(commandConvertReplaceAll.convertReplaceAll.string);
         const searchString = storeConfigService.getElementStoreConfigConstructor(commandConvertReplaceAll.convertReplaceAll.searchString);
         const replaceString = storeConfigService.getElementStoreConfigConstructor(commandConvertReplaceAll.convertReplaceAll.replaceString);
-        loggerService.info("Замена символов в строке", { config: commandConvertReplaceAll.convertReplaceAll, name: command.name });
+        loggerService.info("Замена символов в строке", { config: { name: command.name } });
         const result = convertService.convertReplaceAll(string, searchString, replaceString);
         return result;
     }
@@ -147,15 +157,22 @@ class ConstuctorService {
         const path = storeConfigService.getElementStoreConfigConstructor(commandDownloadFileHttp.downloadFileHttp.path);
         const fileName = storeConfigService.getElementStoreConfigConstructor(commandDownloadFileHttp.downloadFileHttp.fileName);
         await fileService.downloadFileHttp(url, path, fileName);
+        loggerService.info("Скачен файл и сохранен", { config: { name: command.name, url, path, fileName } });
     }
 
     public async runConfig(commandList: Command[], body?: ConstuctorBody) {
+        loggerService.info("Сохранение входящих данных", { data: body });
         storeConfigService.saveBody(body);
-        loggerService.info("запуск команды");
 
         for (const [index, command] of commandList.entries()) {
+            let ifsResult = true;
 
-            if (command.ifs && !ifsService.ifsRun(command.ifs)) {
+            if (command.ifs) {
+                ifsResult = ifsService.ifsRun(command.ifs) as boolean;
+                loggerService.info(`Результат условия для ${command.name} = ${ifsResult}`, { config: { name: command.name } });
+            }
+
+            if (!ifsResult) {
                 continue;
             }
 
