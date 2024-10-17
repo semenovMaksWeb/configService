@@ -16,6 +16,7 @@ class IfsService {
 
         while (copyConfig.length > 1) {
             let [value1, value2, value3] = copyConfig.splice(0, 3); // удалить конфиг и получить нужные значения
+            
             const operator = value2 as OperatorConfig;
             value1 = storeConfigService.getElementStoreConfigConstructor(value1 as StoreConfigElement);
             value2 = storeConfigService.getElementStoreConfigConstructor(value3 as StoreConfigElement);
