@@ -6,7 +6,7 @@ class ForService {
         const array = storeConfigService.getElementStoreConfigConstructor(commandFor.for.array);
         for (const element of array) {
             storeConfigService.setStore(commandFor, element, commandFor.for.item);
-            await constuctorService.runConfig(commandFor.for.config);
+            await constuctorService.runConfig(commandFor.for.config, undefined, true);
         }
     }
 }

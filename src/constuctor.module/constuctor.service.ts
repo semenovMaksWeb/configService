@@ -160,9 +160,11 @@ class ConstuctorService {
         loggerService.info("Скачен файл и сохранен", { config: { name: command.name, url, path, fileName } });
     }
 
-    public async runConfig(commandList: Command[], body?: ConstuctorBody) {
-        loggerService.info("Сохранение входящих данных", { data: body });
-        storeConfigService.saveBody(body);
+    public async runConfig(commandList: Command[], body?: ConstuctorBody, isFor = false) {
+        if (!isFor) {
+            loggerService.info("Сохранение входящих данных", { data: body });
+            storeConfigService.saveBody(body);
+        }
 
         for (const [index, command] of commandList.entries()) {
             let ifsResult = true;
