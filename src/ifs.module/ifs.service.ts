@@ -1,7 +1,7 @@
-import { ifsOperator } from "./ifs.interface";
+import { ifsOperator, OperatorAction } from "./ifs.interface";
 
 class IfsService {
-    private operatorAction: { [key in ifsOperator]: (a: any, b: any) => boolean } = {
+    private operatorAction: OperatorAction = {
         [ifsOperator["=="]]: (a: any, b: any) => a == b,
         [ifsOperator["!="]]: (a: any, b: any) => a != b,
         [ifsOperator[">"]]: (a: any, b: any) => a > b,
@@ -10,29 +10,26 @@ class IfsService {
         [ifsOperator[">="]]: (a: any, b: any) => a >= b,
     }
 
-    ifsRun(config: any) {
+    public ifsRun(config: any) {
         const copyConfig = JSON.parse(JSON.stringify(config));
 
         while (copyConfig.length > 1) {
-            const value1 = copyConfig[0] // 1 значение;
-            const value2 = copyConfig[2] // 2 значение;
-            const operator = copyConfig[1].operator as ifsOperator // оператор
+            const [value1, operator, value2] = copyConfig.splice(0, 3); // удалить конфиг и получить нужные значения
 
-            if (!operator && Object.values(ifsOperator).includes(operator)) {
-                throw new Error("Невалидный конфиг оператора");
+            if (!operator) {
+                throw new Error("Невалидный конфиг оператора не указан");
             }
 
-            const action = this.operatorAction[operator];
+            const action = this.operatorAction[operator as ifsOperator];
             if (!action) {
                 throw new Error(`Неизвестный оператор: ${operator}`);
             }
 
-            const result = action(value1, value2)
-            copyConfig.splice(0, 3); // удаление конфига
+            const result = action(value1, value2) // вызов сравнения
             copyConfig.unshift(result);  // сохранение результата конфига
         }
 
-        return copyConfig
+        return copyConfig[0];
     }
 }
 
