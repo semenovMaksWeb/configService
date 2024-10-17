@@ -2,7 +2,7 @@ import { StoreConfig, StoreConfigElement } from "@src/store.module/store.config/
 import { Store } from "@src/store.module/store.interface";
 import { storeService } from "@src/store.module/store.service";
 
-import { Command, CommandResultOperator } from "@src/constuctor.module/constuctor.module";
+import { Command, CommandResultOperator, ConstuctorBody } from "@src/constuctor.module/constuctor.module";
 import { convertService } from "@src/libs.module/libs.module";
 
 class StoreConfigService {
@@ -59,8 +59,8 @@ class StoreConfigService {
         }
     }
 
-    private setStorePush(key: string | string[], value: any, command: Command) {
-        if (command.copyResult) {
+    private setStorePush(key: string | string[], value: any, command?: Command) {
+        if (command?.copyResult) {
             value = JSON.parse(JSON.stringify(value));
         }
         if (Array.isArray(key)) {
@@ -68,6 +68,18 @@ class StoreConfigService {
             return;
         }
         storeService.pushStore(key, value);
+    }
+
+    saveBody(body: ConstuctorBody) {
+        if (!body) {
+            return;
+        }
+        for (const key in body) {
+            if (Object.prototype.hasOwnProperty.call(body, key)) {
+                const element = body[key];
+                this.setStorePush(["body", key], element, undefined)
+            }
+        }
     }
 }
 

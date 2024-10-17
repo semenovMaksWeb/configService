@@ -27,6 +27,9 @@ export enum CommandAction {
     DOWNLOAD_FILE_HTTP = "downloadFileHttp",
 }
 
+export type ConstuctorBody = { [key: string]: any }
+
+
 export enum CommandResultOperator {
     PUSH = "push",
     EQUALLY = "=",
