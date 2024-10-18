@@ -1,8 +1,8 @@
 import mysql, { Pool } from "mysql2"
-import { BdConfigResult } from "@src/bd.module/bd.interface";
+import { DBConfigResult } from "@src/db.module/db.interface";
 
 class MySqlService {
-    public connection(bdConfigResult: BdConfigResult) {
+    public connection(bdConfigResult: DBConfigResult) {
         return mysql.createPool({
             host: bdConfigResult.host,
             user: bdConfigResult.user,

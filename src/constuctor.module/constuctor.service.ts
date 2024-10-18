@@ -1,6 +1,6 @@
 import { Command, CommandAction, CommandConnectionDatabase, CommandConvertInDom, CommandConvertValidString, CommandDirectoryFile, CommandDownloadFileHttp, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFindElementHtmlAll, CommandFor, CommandGetAtrHtml, CommandGetInnerHtml, CommandInitVar, CommandMappigJson, CommandReplaceAll, CommandSql, ConstuctorBody } from "@src/constuctor.module/constuctor.interface";
 
-import { bdService } from "@src/bd.module/bd.module";
+import { dbService } from "@src/db.module/db.module";
 import { fileService } from "@src/file.module/file.module";
 import { storeConfigService } from "@src/store.module/store.module";
 import { jsonService } from "@src/json.module/json.module";
@@ -25,7 +25,7 @@ class ConstuctorService {
     // подключение к бд
     private connectionDatabase(command: Command) {
         const commandConnectionDatabase = command as CommandConnectionDatabase;
-        const result = bdService.connectionDatabase(commandConnectionDatabase.connection);
+        const result = dbService.connectionDatabase(commandConnectionDatabase.connection);
         loggerService.info("Выполнено подключение к бд", [{ config: { name: command.name, connection: commandConnectionDatabase.connection } }]);
         return result;
     }
@@ -33,7 +33,7 @@ class ConstuctorService {
     // вызов sql функции
     private async sqlCall(command: Command) {
         const commandSql = command as CommandSql;
-        const result = await bdService.sqlCall(commandSql);
+        const result = await dbService.sqlCall(commandSql);
         loggerService.info("Выполнен sql запрос", [{ config: { sql: commandSql.sql.query, name: command.name } }]);
         return result;
     }

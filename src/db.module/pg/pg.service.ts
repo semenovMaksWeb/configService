@@ -1,8 +1,8 @@
 import { Pool } from "pg"
-import { BdConfigResult } from "@src/bd.module/bd.interface";
+import { DBConfigResult } from "@src/db.module/db.interface";
 
 class PgService {
-    public connection(bdConfigResult: BdConfigResult) {
+    public connection(bdConfigResult: DBConfigResult) {
         return new Pool({
             password: bdConfigResult.password,
             user: bdConfigResult.user,
@@ -11,9 +11,9 @@ class PgService {
             host: bdConfigResult.host
         });
     }
-    
+
     public async sqlCall(connection: Pool, sql: string, params: any[]) {
-        return await connection.query(sql, params);
+        return (await connection.query(sql, params)).rows;
     }
 }
 export const pgService = new PgService();

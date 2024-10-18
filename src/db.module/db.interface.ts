@@ -1,13 +1,13 @@
-export enum ConnectionBd {
+export enum ConnectionDB {
     POSTGRE_SQL = "PostgreSQL",
     MYSQL = "MySql"
 }
 
-export type BdConfigResult = {
+export type DBConfigResult = {
     user: string,
     password: string,
     host: string,
     port: number,
     database: string,
-    type: ConnectionBd
+    type: ConnectionDB
 }
