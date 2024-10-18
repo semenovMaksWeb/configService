@@ -6,7 +6,6 @@ import { mySqlService } from "@src/db.module/mySql/mySql.service";
 import { loggerService } from "@src/logger.module/logger.service";
 
 class DBService {
-    constructor() { }
 
     private connectionBd = {
         [ConnectionDB.POSTGRE_SQL]: pgService,
@@ -14,25 +13,35 @@ class DBService {
     }
 
     private getConnectionBd(type: ConnectionDB) {
-        if (!(type in this.connectionBd)) {
+        const connectionBd = this.connectionBd[type];
+        if (!connectionBd) {
             throw new Error(`Обработка данной СУБД не реализовано - ${type}`)
         }
-        return this.connectionBd[type];
+        return connectionBd;
     }
 
     public connectionDatabase(bdConfigList: StoreConfig[]) {
-        const bdConfigResult: DBConfigResult = storeConfigService.getStoreConfigObject(bdConfigList) as DBConfigResult;
+        const bdConfigResult = storeConfigService.getStoreConfigObject(bdConfigList) as DBConfigResult;
         const connectionBd = this.getConnectionBd(bdConfigResult.type);
-        return connectionBd.connection((bdConfigResult));
+
+        try {
+            return connectionBd.connection((bdConfigResult));
+        } catch (error) {
+            if (error instanceof Error) {
+                loggerService.error(`Ошибка при подключение к бд: ${error.message}`, { config: { connection: bdConfigResult } });
+                throw new Error(`Ошибка при подключение к бд: ${error.message}`);
+            }
+        }
+
     }
 
     public async sqlCall(commandSql: CommandSql) {
-        // TODO Придумать как определять type СУБД
         const connection = storeConfigService.getElementStoreConfigConstructor(commandSql.sql.connection);
         const paramsSql = storeConfigService.getStoreConfigArray(commandSql.sql.params);
         const typeBd = storeConfigService.getElementStoreConfigConstructor(commandSql.sql.type) as ConnectionDB;
 
         const connectionBd = this.getConnectionBd(typeBd);
+
         try {
             return await connectionBd.sqlCall(connection, commandSql.sql.query, paramsSql);
         } catch (error) {
