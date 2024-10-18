@@ -1,4 +1,4 @@
-import { Command, CommandAction, CommandConnectionDatabase, CommandConvertInDom, CommandConvertValidString, CommandDirectoryFile, CommandDownloadFileHttp, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFindElementHtmlAll, CommandFor, CommandGetAtrHtml, CommandGetInnerHtml, CommandInitVar, CommandMappigJson, CommandReplaceAll, CommandSql, ConstuctorBody } from "@src/constuctor.module/constuctor.interface";
+import { Command, CommandAction, CommandConnectionDatabase, CommandConvertInDom, CommandConvertListInKeyArray, CommandConvertValidString, CommandDirectoryFile, CommandDownloadFileHttp, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFindElementHtmlAll, CommandFor, CommandGetAtrHtml, CommandGetInnerHtml, CommandInitVar, CommandMappigJson, CommandReplaceAll, CommandSql, ConstuctorBody } from "@src/constuctor.module/constuctor.interface";
 
 import { dbService } from "@src/db.module/db.module";
 import { fileService } from "@src/file.module/file.module";
@@ -160,6 +160,15 @@ class ConstuctorService {
         loggerService.info("Скачен файл и сохранен", { config: { name: command.name, url, path, fileName } });
     }
 
+    private сonvertListInKeyArray(command: Command) {
+        const commandConvertListInKeyArray = command as CommandConvertListInKeyArray;
+        const key = storeConfigService.getElementStoreConfigConstructor(commandConvertListInKeyArray.convertListInKeyArray.key);
+        const list = storeConfigService.getElementStoreConfigConstructor(commandConvertListInKeyArray.convertListInKeyArray.list);
+        const result = convertService.convertListInKeyArray(list, key);
+        loggerService.info("Получения массива из массива объектов по ключу", { config: { name: command.name }, result });
+        return result;
+    }
+
     public async runConfig(commandList: Command[], body?: ConstuctorBody, isFor = false) {
         if (!isFor) {
             loggerService.info("Сохранение входящих данных", { data: body });
@@ -242,6 +251,10 @@ class ConstuctorService {
 
                 case CommandAction.DOWNLOAD_FILE_HTTP: // скачать файл по http и сохранить в файл
                     await this.downloadFileHttp(command);
+                    break;
+
+                case CommandAction.CONVERT_LIST_IN_KEY_ARRAY:
+                    resultCommand = this.сonvertListInKeyArray(command);
                     break;
             }
 

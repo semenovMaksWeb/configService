@@ -25,7 +25,8 @@ export enum CommandAction {
 
     CONVERT_VALID_STRING = "convertValidString", // убрать лишние пробелы и переносы из строки
     CONVERT_REPLACE_ALL = "convertReplaceAll", // замена символов в строке
-    DOWNLOAD_FILE_HTTP = "downloadFileHttp",
+    CONVERT_LIST_IN_KEY_ARRAY = "convertListInKeyArray", // из массива объекта получить массив значение по ключу
+    DOWNLOAD_FILE_HTTP = "downloadFileHttp", // Скачать файл с интернета по http
 }
 
 export type ConstuctorBody = { [key: string]: any }
@@ -44,6 +45,13 @@ export interface Command {
     name: string | string[];
     comment: string | null;
     copyResult?: boolean;
+}
+
+export interface CommandConvertListInKeyArray extends Command {
+    convertListInKeyArray: {
+        key: StoreConfigElement,
+        list: StoreConfigElement
+    }
 }
 
 export interface CommandDownloadFileHttp extends Command {

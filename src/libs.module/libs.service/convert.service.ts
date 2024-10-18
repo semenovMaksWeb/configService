@@ -2,7 +2,8 @@ import { TypeVarEnum } from "@src/libs.module/list.type/libs.enum";
 import { StoreConvert } from "@src/store.module/store.config/store.config.interface";
 
 class ConvertService {
-    convertVar(value: any, convert: StoreConvert) {
+    public convertVar(value: any, convert: StoreConvert) {
+
         if (!convert?.type) {
             return value;
         }
@@ -32,7 +33,7 @@ class ConvertService {
                 break;
             }
             case TypeVarEnum.json: {
-                if (typeof value === "string") {
+                if (typeof value === "string") {                   
                     value = JSON.parse(value);
                 }
                 break;
@@ -50,12 +51,16 @@ class ConvertService {
         return value;
     }
 
-    convertReplaceAll(value: string, searchString: string, replaceString: string) {
+    public convertReplaceAll(value: string, searchString: string, replaceString: string) {
         return value.replaceAll(searchString, replaceString);
     }
 
-    convertValidString(value: string) {
+    public convertValidString(value: string) {
         return value.replace(/\s{2,}/g, ' ')
+    }
+
+    public convertListInKeyArray(list: any[], key: string) {
+        return list.map((e) => e[key]);
     }
 }
 
