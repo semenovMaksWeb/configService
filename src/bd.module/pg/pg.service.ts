@@ -1,5 +1,5 @@
 import { Pool } from "pg"
-import { BdConfigResult } from "@src/bd.module/bd.config/bd.config.interface";
+import { BdConfigResult } from "@src/bd.module/bd.interface";
 
 class PgService {
     public connection(bdConfigResult: BdConfigResult) {

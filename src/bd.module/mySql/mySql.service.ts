@@ -1,5 +1,5 @@
 import mysql, { Pool } from "mysql2"
-import { BdConfigResult } from "@src/bd.module/bd.config/bd.config.interface";
+import { BdConfigResult } from "@src/bd.module/bd.interface";
 
 class MySqlService {
     public connection(bdConfigResult: BdConfigResult) {

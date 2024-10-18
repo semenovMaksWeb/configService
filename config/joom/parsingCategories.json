@@ -64,7 +64,10 @@
         "for": {
             "item": "categoriesItem",
             "array": {
-                "store": ["jsonParsing", "categories"],
+                "store": [
+                    "jsonParsing",
+                    "categories"
+                ],
                 "convert": null
             },
             "config": [
@@ -94,6 +97,20 @@
                     }
                 },
                 {
+                    "ifs": [
+                        {
+                            "store": [
+                                "body",
+                                "isDowload"
+                            ]
+                        },
+                        {
+                            "operator": "=="
+                        },
+                        {
+                            "const": true
+                        }
+                    ],
                     "name": "dowloadFile",
                     "action": "downloadFileHttp",
                     "comment": "скачать и сохранить файл продукта на диск",
