@@ -1,0 +1,52 @@
+[
+    {
+        "name": "fileCategories",
+        "result": "=",
+        "comment": "Чтения файла: Ответ с категориями",
+        "action": "fileRead",
+        "path": {
+            "const": "./media/joom/dataset_out/categories.json",
+            "convert": null
+        }
+    },
+    {
+        "name": "fileCategories",
+        "action": "initVar",
+        "result": "=",
+        "comment": "Сохранить путь к файлу",
+        "initVar": {
+            "store": "fileCategories",
+            "convert": {
+                "type": "json"
+            }
+        }
+    },
+    {
+        "name": "nameList",
+        "result": "=",
+        "comment": "Массив названии",
+        "action": "convertListInKeyArray",
+        "convertListInKeyArray": {
+            "key": {
+                "const": "name"
+            },
+            "list": {
+                "store": "fileCategories"
+            }
+        }
+    },
+    {
+        "name": "imageList",
+        "result": "=",
+        "comment": "Массив названии",
+        "action": "convertListInKeyArray",
+        "convertListInKeyArray": {
+            "key": {
+                "const": "image"
+            },
+            "list": {
+                "store": "fileCategories"
+            }
+        }
+    }
+]

@@ -1,0 +1,35 @@
+[
+    {
+        "ifs": [
+            {
+                "store": [
+                    "body",
+                    "isDowload"
+                ]
+            },
+            {
+                "operator": "=="
+            },
+            {
+                "const": true
+            }
+        ],
+        "name": "dowloadFile",
+        "action": "downloadFileHttp",
+        "comment": "скачать и сохранить файл продукта на диск",
+        "downloadFileHttp": {
+            "path": {
+                "const": "./media/joom/dataset_out/img/categories/"
+            },
+            "url": {
+                "store": [
+                    "categoriesItem",
+                    "image"
+                ]
+            },
+            "fileName": {
+                "store": "fileName"
+            }
+        }
+    }
+]

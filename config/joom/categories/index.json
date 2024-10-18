@@ -1,0 +1,46 @@
+[
+    {
+        "name": "fuctionParsing",
+        "action": "fileConfig",
+        "ifs": [
+            {
+                "store": [
+                    "body",
+                    "parsing"
+                ],
+                "convert": null
+            },
+            {
+                "operator": "=="
+            },
+            {
+                "const": true
+            }
+        ],
+        "path": "/joom/categories/parsingCategories.json",
+        "result": "=",
+        "comment": "Парсинг категории с API внутри происходит скачивания файлов при наличии ключа isDowload"
+    },
+    {
+        "name": "fuction",
+        "action": "fileConfig",
+        "ifs": [
+            {
+                "store": [
+                    "body",
+                    "db"
+                ],
+                "convert": null
+            },
+            {
+                "operator": "=="
+            },
+            {
+                "const": true
+            }
+        ],
+        "path": "/joom/categories/dbCategories.json",
+        "result": "=",
+        "comment": "Сохранение в бд"
+    }
+]
