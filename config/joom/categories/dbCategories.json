@@ -48,5 +48,39 @@
                 "store": "fileCategories"
             }
         }
+    },
+    {
+        "name": "fuctionConnectionDB",
+        "action": "fileConfig",
+        "path": "/connection/postgressql.json",
+        "result": "=",
+        "comment": "Подключение к бд"
+    },
+    {
+        "name": "sqlResultMysql",
+        "action": "sql",
+        "result": "=",
+        "comment": "Вызов sql функции",
+        "sql": {
+            "type": {
+                "env": "BD_MAIN_TYPE",
+                "convert": {
+                    "type": "string"
+                }
+            },
+            "connection": {
+                "store": "connectionMain",
+                "convert": null
+            },
+            "query": "INSERT INTO joom.categories (name, image) (SELECT * FROM UNNEST($1::varchar[], $2::varchar[]))",
+            "params": [
+                {
+                    "store": "nameList"
+                },
+                {
+                    "store": "imageList"
+                }
+            ]
+        }
     }
 ]
