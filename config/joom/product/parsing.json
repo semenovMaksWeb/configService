@@ -210,7 +210,11 @@
                                         ]
                                     },
                                     "searchString": {
-                                        "const": "&nbsp;₽"
+                                        "const": "(&nbsp)|(;)|(₽)",
+                                        "convert": {
+                                            "type": "RegExp",
+                                            "regExpFlag": "gi"
+                                        }
                                     },
                                     "replaceString": {
                                         "const": ""

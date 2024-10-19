@@ -18,8 +18,9 @@ class ConstuctorService {
         const path = `${process.env.CONFIG_CATALOG}${commandFileConfig.path}`;
         const configFile = await fileService.readFile(path);
         const jsonConfig = JSON.parse(configFile.toString());
+        loggerService.info("Начало конфига из файла", [{ config: { path: commandFileConfig.path, name: command.name } }]);
         await this.runConfig(jsonConfig, undefined, true);
-        loggerService.info("Выполнено конфига из файла", [{ config: { path: commandFileConfig.path, name: command.name } }]);
+        loggerService.info("Конец конфига из файла", [{ config: { path: commandFileConfig.path, name: command.name } }]);
     }
 
     // подключение к бд
