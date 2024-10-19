@@ -20,6 +20,13 @@
         }
     },
     {
+        "name": "fuctionConnectionDB",
+        "action": "fileConfig",
+        "path": "/connection/postgressql.json",
+        "result": "=",
+        "comment": "Подключение к бд"
+    },
+    {
         "name": "forElementFile",
         "comment": "Прогнать в цикле файлы указанные в for.array",
         "action": "for",
@@ -51,6 +58,46 @@
                             "store": "fileApi",
                             "convert": null
                         }
+                    }
+                },
+                {
+                    "name": "categoriesProductFromFile",
+                    "action": "getInnerHtml",
+                    "comment": "сохранение в переменную категории из html",
+                    "result": "=",
+                    "getInnerHtml": {
+                        "html": {
+                            "store": "htmlDom",
+                            "convert": null
+                        },
+                        "selector": {
+                            "const": ".header___brtVq",
+                            "convert": null
+                        }
+                    }
+                },
+                {
+                    "name": "categoriesProductId",
+                    "action": "sql",
+                    "result": "=",
+                    "comment": "Вызов sql функции получение категории",
+                    "sql": {
+                        "type": {
+                            "env": "BD_MAIN_TYPE",
+                            "convert": {
+                                "type": "string"
+                            }
+                        },
+                        "connection": {
+                            "store": "connectionMain",
+                            "convert": null
+                        },
+                        "query": "SELECT id from joom.categories c where c.name = $1",
+                        "params": [
+                            {
+                                "store": "categoriesProductFromFile"
+                            }
+                        ]
                     }
                 },
                 {
@@ -173,6 +220,23 @@
                             {
                                 "name": [
                                     "productObject",
+                                    "idCategories"
+                                ],
+                                "action": "initVar",
+                                "result": "=",
+                                "comment": "Сохранить idCategories в продукт",
+                                "initVar": {
+                                    "store": [
+                                        "categoriesProductId",
+                                        0,
+                                        "id"
+                                    ],
+                                    "convert": null
+                                }
+                            },
+                            {
+                                "name": [
+                                    "productObject",
                                     "price"
                                 ],
                                 "action": "initVar",
@@ -229,23 +293,11 @@
                                 }
                             },
                             {
-                                "name": "dowloadFile",
-                                "action": "downloadFileHttp",
-                                "comment": "скачать и сохранить файл продукта на диск",
-                                "downloadFileHttp": {
-                                    "path": {
-                                        "const": "./media/joom/dataset_out/img/product"
-                                    },
-                                    "url": {
-                                        "store": "imageUrl"
-                                    },
-                                    "fileName": {
-                                        "store": [
-                                            "productObject",
-                                            "image"
-                                        ]
-                                    }
-                                }
+                                "name": "fuctionDowloadFile",
+                                "action": "fileConfig",
+                                "path": "/joom/product/dowloadFile.json",
+                                "result": "=",
+                                "comment": "Скачивания файлов"
                             },
                             {
                                 "name": "productList",

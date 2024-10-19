@@ -1,0 +1,35 @@
+[
+    {
+        "name": "dowloadFile",
+        "action": "downloadFileHttp",
+        "ifs": [
+            {
+                "store": [
+                    "body",
+                    "isDowload"
+                ]
+            },
+            {
+                "operator": "=="
+            },
+            {
+                "const": true
+            }
+        ],
+        "comment": "скачать и сохранить файл продукта на диск",
+        "downloadFileHttp": {
+            "path": {
+                "const": "./media/joom/dataset_out/img/product"
+            },
+            "url": {
+                "store": "imageUrl"
+            },
+            "fileName": {
+                "store": [
+                    "productObject",
+                    "image"
+                ]
+            }
+        }
+    }
+]

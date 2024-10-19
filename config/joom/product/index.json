@@ -17,9 +17,9 @@
                 "const": true
             }
         ],
-        "path": "/joom/categories/parsing.json",
+        "path": "/joom/product/parsing.json",
         "result": "=",
-        "comment": "Парсинг категории с API внутри происходит скачивания файлов при наличии ключа isDowload"
+        "comment": "Парсинг продуктов с html файлов, и скачивания картинок при наличии ключа isDowload"
     },
     {
         "name": "fuction",
@@ -39,8 +39,8 @@
                 "const": true
             }
         ],
-        "path": "/joom/categories/db.json",
+        "path": "/joom/product/db.json",
         "result": "=",
-        "comment": "Сохранение в бд"
+        "comment": "Сохранение в бд продуктов"
     }
 ]
