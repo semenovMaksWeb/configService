@@ -12,14 +12,14 @@ import { ifsService } from "@src/ifs.module/ifs.service";
 
 class ConstuctorService {
 
-    // файл конфиг копирование
-    private async fileConfig(command: Command, commandList: Command[], index: number) {
+    // файл конфига выполнить
+    private async fileConfig(command: Command) {
         const commandFileConfig = command as CommandFileConfig;
         const path = `${process.env.CONFIG_CATALOG}${commandFileConfig.path}`;
         const configFile = await fileService.readFile(path);
         const jsonConfig = JSON.parse(configFile.toString());
-        commandList.splice(index + 1, 0, ...jsonConfig);
-        loggerService.info("Выполнено копирования конфига", [{ config: { path: commandFileConfig.path, name: command.name } }]);
+        await this.runConfig(jsonConfig, undefined, true);
+        loggerService.info("Выполнено конфига из файла", [{ config: { path: commandFileConfig.path, name: command.name } }]);
     }
 
     // подключение к бд
@@ -160,17 +160,18 @@ class ConstuctorService {
         loggerService.info("Скачен файл и сохранен", { config: { name: command.name, url, path, fileName } });
     }
 
+    // Получения массива из массива объектов по ключу
     private сonvertListInKeyArray(command: Command) {
         const commandConvertListInKeyArray = command as CommandConvertListInKeyArray;
         const key = storeConfigService.getElementStoreConfigConstructor(commandConvertListInKeyArray.convertListInKeyArray.key);
         const list = storeConfigService.getElementStoreConfigConstructor(commandConvertListInKeyArray.convertListInKeyArray.list);
         const result = convertService.convertListInKeyArray(list, key);
-        loggerService.info("Получения массива из массива объектов по ключу", { config: { name: command.name }, result });
+        loggerService.info("Получен массива из массива объектов по ключу", { config: { name: command.name }, result });
         return result;
     }
 
-    public async runConfig(commandList: Command[], body?: ConstuctorBody, isFor = false) {
-        if (!isFor) {
+    public async runConfig(commandList: Command[], body?: ConstuctorBody, isRecursion = false) {
+        if (!isRecursion) {
             loggerService.info("Сохранение входящих данных", { data: body });
             storeConfigService.saveBody(body);
         }
@@ -189,8 +190,8 @@ class ConstuctorService {
 
             let resultCommand = null;
             switch (command.action) {
-                case CommandAction.FILE_CONFIG: // файл конфиг копирование
-                    await this.fileConfig(command, commandList, index);
+                case CommandAction.FILE_CONFIG: // файл конфига вызов
+                    await this.fileConfig(command);
                     break;
 
                 case CommandAction.CONNECTION_DATABASE: // подключение к бд
