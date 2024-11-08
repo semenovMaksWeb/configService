@@ -33,7 +33,7 @@ class ConvertService {
                 break;
             }
             case TypeVarEnum.json: {
-                if (typeof value === "string") {                   
+                if (typeof value === "string") {
                     value = JSON.parse(value);
                 }
                 break;

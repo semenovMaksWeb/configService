@@ -6,6 +6,6 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 (async () => {
-    await constuctorService.runConfig(configTest as Command[], { isDowload: false, parsing: true, db: false });
+    await constuctorService.runConfig(configTest as Command[], { isDowload: false, parsing: false, db: true });
     console.log(storeService.getAllStore());
 })();
