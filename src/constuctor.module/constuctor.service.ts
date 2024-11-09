@@ -12,6 +12,28 @@ import { ifsService } from "@src/ifs.module/ifs.service";
 
 class ConstuctorService {
 
+
+    private commandAction = {
+        [CommandAction.FILE_CONFIG]: this.fileConfig,
+        [CommandAction.CONNECTION_DATABASE]: this.connectionDatabase,
+        [CommandAction.SQL_CALL]: this.sqlCall,
+        [CommandAction.FILE_READ]: this.readFile,
+        [CommandAction.FILE_WRITE]: this.writeFile,
+        [CommandAction.DIRECTORY_FILE]: this.directoryFile,
+        [CommandAction.MAPPING_JSON]: this.mappingJson,
+        [CommandAction.INIT_VAR]: this.initVar,
+        [CommandAction.FOR]: this.for,
+        [CommandAction.CONVERT_IN_DOM]: this.convertInDom,
+        [CommandAction.FIND_ELEMENT_HTML_ALL]: this.findElementHtmlAll,
+        [CommandAction.GET_INNER_HTML]: this.getInnerHtml,
+        [CommandAction.GET_ATR_HTML]: this.getAtrHtml,
+        [CommandAction.CONVERT_VALID_STRING]: this.convertValidString,
+        [CommandAction.CONVERT_REPLACE_ALL]: this.convertReplaceAll,
+        [CommandAction.DOWNLOAD_FILE_HTTP]: this.downloadFileHttp,
+        [CommandAction.CONVERT_LIST_IN_KEY_ARRAY]: this.сonvertListInKeyArray,
+    }
+
+
     // файл конфига выполнить
     private async fileConfig(command: Command) {
         const commandFileConfig = command as CommandFileConfig;
@@ -177,7 +199,7 @@ class ConstuctorService {
             storeConfigService.saveBody(body);
         }
 
-        for (const [index, command] of commandList.entries()) {
+        for (const command of commandList) {
             let ifsResult = true;
 
             if (command.ifs) {
@@ -190,76 +212,7 @@ class ConstuctorService {
             }
 
             let resultCommand = null;
-            switch (command.action) {
-                case CommandAction.FILE_CONFIG: // файл конфига вызов
-                    await this.fileConfig(command);
-                    break;
-
-                case CommandAction.CONNECTION_DATABASE: // подключение к бд
-                    resultCommand = this.connectionDatabase(command);
-                    break;
-
-                case CommandAction.SQL_CALL: // вызов sql функции
-                    resultCommand = await this.sqlCall(command)
-                    break;
-
-                case CommandAction.FILE_READ: // чтения файла
-                    resultCommand = await this.readFile(command);
-                    break;
-
-                case CommandAction.FILE_WRITE: // запись файла
-                    await this.writeFile(command);
-                    break;
-
-                case CommandAction.DIRECTORY_FILE: // чтения путей в файлов в каталоге
-                    resultCommand = await this.directoryFile(command);
-                    break;
-
-                case CommandAction.MAPPING_JSON: // парсинг json в др формат json
-                    resultCommand = this.mappingJson(command);
-                    break;
-
-                case CommandAction.INIT_VAR: // иницилизация переменной
-                    resultCommand = this.initVar(command);
-                    break;
-
-                case CommandAction.FOR: // вызвать цикл
-                    await this.for(command);
-                    break;
-
-                case CommandAction.CONVERT_IN_DOM: // из строки в html
-                    resultCommand = this.convertInDom(command);
-                    break;
-
-                case CommandAction.FIND_ELEMENT_HTML_ALL: // найди множество элементов по selector
-                    resultCommand = this.findElementHtmlAll(command);
-                    break;
-
-                case CommandAction.GET_INNER_HTML: // из dom-element получить его содержимое
-                    resultCommand = this.getInnerHtml(command);
-                    break;
-
-                case CommandAction.GET_ATR_HTML: // из dom-element получить атрибут
-                    resultCommand = this.getAtrHtml(command);
-                    break;
-
-                case CommandAction.CONVERT_VALID_STRING: // убрать из строки переносы и множ. пробелы
-                    resultCommand = this.convertValidString(command);
-                    break;
-
-                case CommandAction.CONVERT_REPLACE_ALL: // поиск с заменой символов в строке
-                    resultCommand = this.convertReplaceAll(command);
-                    break;
-
-                case CommandAction.DOWNLOAD_FILE_HTTP: // скачать файл по http и сохранить в файл
-                    await this.downloadFileHttp(command);
-                    break;
-
-                case CommandAction.CONVERT_LIST_IN_KEY_ARRAY:
-                    resultCommand = this.сonvertListInKeyArray(command);
-                    break;
-            }
-
+            resultCommand = this.commandAction[command.action](command);
             storeConfigService.setStore(command, resultCommand, command.name);
         }
     }
