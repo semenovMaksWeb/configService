@@ -51,7 +51,7 @@ class ConstuctorService {
         const commandWebElementClick = command as CommandWebElementClick;
         const page = storeConfigService.getElementStoreConfigConstructor(commandWebElementClick.webElementClick.page);
         const selector = storeConfigService.getElementStoreConfigConstructor(commandWebElementClick.webElementClick.selector);
-        return await webService.elementClick(page, selector);
+        await webService.elementClick(page, selector);
     }
 
     // открыть веб браузер
