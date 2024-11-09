@@ -19,7 +19,10 @@ class HtmlService {
     }
 
     getTextContent(selector: string, html: HTMLElement) {
-        return html.querySelector(selector)?.textContent;
+        if (selector) {
+            return html.querySelector(selector)?.textContent;
+        }
+        return html.textContent
     }
 
     getAtrHtml(selector: string, nameArt: string, html: HTMLElement) {
