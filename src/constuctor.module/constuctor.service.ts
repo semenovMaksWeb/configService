@@ -43,7 +43,9 @@ class ConstuctorService {
         const commandWebElementClick = command as CommandWebGetInnerHTML;
         const page = storeConfigService.getElementStoreConfigConstructor(commandWebElementClick.webGetInnerHTML.page);
         const selector = storeConfigService.getElementStoreConfigConstructor(commandWebElementClick.webGetInnerHTML.selector);
-        return await webService.innerHtmlELement(page, selector);
+        const result = await webService.innerHtmlELement(page, selector);
+        loggerService.info("Получения html из браузера", [{ config: { name: command.name, selector: selector, result: result } }]);
+        return result;
     }
 
     // Нажать на элемент в веб браузере
@@ -51,6 +53,7 @@ class ConstuctorService {
         const commandWebElementClick = command as CommandWebElementClick;
         const page = storeConfigService.getElementStoreConfigConstructor(commandWebElementClick.webElementClick.page);
         const selector = storeConfigService.getElementStoreConfigConstructor(commandWebElementClick.webElementClick.selector);
+        loggerService.info("Клик на элемент в браузере", [{ config: { name: command.name, selector: selector } }]);
         await webService.elementClick(page, selector);
     }
 
@@ -58,7 +61,9 @@ class ConstuctorService {
     private async webOpen(command: Command) {
         const commandWebOpen = command as CommandWebOpen;
         const url = storeConfigService.getElementStoreConfigConstructor(commandWebOpen.webOpen.url);
-        return await webService.openWeb(url);
+        const result = await webService.openWeb(url);
+        loggerService.info("Открытия браузера", [{ config: { name: command.name, url: url } }]);
+        return result;
     }
 
     // файл конфига выполнить
