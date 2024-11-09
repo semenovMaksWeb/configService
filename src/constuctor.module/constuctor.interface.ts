@@ -29,8 +29,8 @@ export enum CommandAction {
     DOWNLOAD_FILE_HTTP = "downloadFileHttp", // Скачать файл с интернета по http
 
     WEB_OPEN = "webOpen", // открыть браузер определенную страницу
-    WEB_ELEMENT_CLICK = "elementWait", // в браузере нажать на dom-element
-    WEB_ELEMENT_INNER_HTML = "WEB_ELEMENT_INNER_HTML", // в браузере получить html
+    WEB_ELEMENT_CLICK = "webElementClick", // в браузере нажать на dom-element
+    WEB_ELEMENT_INNER_HTML = "webGetInnerHTML", // в браузере получить html
 }
 
 export type ConstuctorBody = { [key: string]: any }
