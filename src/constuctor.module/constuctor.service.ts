@@ -13,31 +13,6 @@ import { webService } from "@src/web.module/web.service";
 
 class ConstuctorService {
 
-
-    private commandAction = {
-        [CommandAction.FILE_CONFIG]: this.fileConfig,
-        [CommandAction.CONNECTION_DATABASE]: this.connectionDatabase,
-        [CommandAction.SQL_CALL]: this.sqlCall,
-        [CommandAction.FILE_READ]: this.readFile,
-        [CommandAction.FILE_WRITE]: this.writeFile,
-        [CommandAction.DIRECTORY_FILE]: this.directoryFile,
-        [CommandAction.MAPPING_JSON]: this.mappingJson,
-        [CommandAction.INIT_VAR]: this.initVar,
-        [CommandAction.FOR]: this.for,
-        [CommandAction.CONVERT_IN_DOM]: this.convertInDom,
-        [CommandAction.FIND_ELEMENT_HTML_ALL]: this.findElementHtmlAll,
-        [CommandAction.GET_INNER_HTML]: this.getInnerHtml,
-        [CommandAction.GET_ATR_HTML]: this.getAtrHtml,
-        [CommandAction.CONVERT_VALID_STRING]: this.convertValidString,
-        [CommandAction.CONVERT_REPLACE_ALL]: this.convertReplaceAll,
-        [CommandAction.DOWNLOAD_FILE_HTTP]: this.downloadFileHttp,
-        [CommandAction.CONVERT_LIST_IN_KEY_ARRAY]: this.сonvertListInKeyArray,
-        [CommandAction.WEB_OPEN]: this.webOpen,
-        [CommandAction.WEB_ELEMENT_CLICK]: this.webElementClick, 
-        [CommandAction.WEB_ELEMENT_INNER_HTML]: this.webGetInnerHtml,
-        [CommandAction.GET_TEXT_CONTENT]: this.getTextContent
-    }
-
     // получить из html у элемента textContent
     private getTextContent(command: Command) {
         const commandGetTextContent = command as CommandGetTextContent;
@@ -75,7 +50,7 @@ class ConstuctorService {
     }
 
     // файл конфига выполнить
-    private async fileConfig(command: Command) {
+    private fileConfig = async (command: Command) => {
         const commandFileConfig = command as CommandFileConfig;
         const path = `${process.env.CONFIG_CATALOG}${commandFileConfig.path}`;
         const configFile = await fileService.readFile(path);
@@ -252,9 +227,38 @@ class ConstuctorService {
             }
 
             let resultCommand = null;
+            if (!this.commandAction[command.action]) {
+                loggerService.error("Указанная команда не реализовано", [{ action: command.action }]);
+                continue;
+            }
             resultCommand = await this.commandAction[command.action](command);
             storeConfigService.setStore(command, resultCommand, command.name);
         }
+    }
+
+
+    private commandAction = {
+        [CommandAction.FILE_CONFIG]: this.fileConfig,
+        [CommandAction.CONNECTION_DATABASE]: this.connectionDatabase,
+        [CommandAction.SQL_CALL]: this.sqlCall,
+        [CommandAction.FILE_READ]: this.readFile,
+        [CommandAction.FILE_WRITE]: this.writeFile,
+        [CommandAction.DIRECTORY_FILE]: this.directoryFile,
+        [CommandAction.MAPPING_JSON]: this.mappingJson,
+        [CommandAction.INIT_VAR]: this.initVar,
+        [CommandAction.FOR]: this.for,
+        [CommandAction.CONVERT_IN_DOM]: this.convertInDom,
+        [CommandAction.FIND_ELEMENT_HTML_ALL]: this.findElementHtmlAll,
+        [CommandAction.GET_INNER_HTML]: this.getInnerHtml,
+        [CommandAction.GET_ATR_HTML]: this.getAtrHtml,
+        [CommandAction.CONVERT_VALID_STRING]: this.convertValidString,
+        [CommandAction.CONVERT_REPLACE_ALL]: this.convertReplaceAll,
+        [CommandAction.DOWNLOAD_FILE_HTTP]: this.downloadFileHttp,
+        [CommandAction.CONVERT_LIST_IN_KEY_ARRAY]: this.сonvertListInKeyArray,
+        [CommandAction.WEB_OPEN]: this.webOpen,
+        [CommandAction.WEB_ELEMENT_CLICK]: this.webElementClick,
+        [CommandAction.WEB_ELEMENT_INNER_HTML]: this.webGetInnerHtml,
+        [CommandAction.GET_TEXT_CONTENT]: this.getTextContent
     }
 }
 
