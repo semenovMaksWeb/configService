@@ -27,6 +27,10 @@ export enum CommandAction {
     CONVERT_REPLACE_ALL = "convertReplaceAll", // замена символов в строке
     CONVERT_LIST_IN_KEY_ARRAY = "convertListInKeyArray", // из массива объекта получить массив значение по ключу
     DOWNLOAD_FILE_HTTP = "downloadFileHttp", // Скачать файл с интернета по http
+
+    WEB_OPEN = "webOpen", // открыть браузер определенную страницу
+    WEB_ELEMENT_CLICK = "elementWait", // в браузере нажать на dom-element
+    WEB_ELEMENT_INNER_HTML = "WEB_ELEMENT_INNER_HTML", // в браузере получить html
 }
 
 export type ConstuctorBody = { [key: string]: any }
@@ -147,3 +151,22 @@ export interface CommandConvertInDom extends Command {
         html: StoreConfigElement
     }
 }
+
+export interface CommandWebOpen extends Command {
+    webOpen: {
+        url: StoreConfigElement
+    }
+}
+export interface CommandWebElementClick extends Command {
+    webElementClick: {
+        page: StoreConfigElement,
+        selector: StoreConfigElement
+    }
+}
+
+export interface CommandWebGetInnerHTML extends Command {
+    webGetInnerHTML: {
+        page: StoreConfigElement,
+        selector: StoreConfigElement
+    }
+} 

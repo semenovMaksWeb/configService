@@ -1,4 +1,4 @@
-import { Command, CommandAction, CommandConnectionDatabase, CommandConvertInDom, CommandConvertListInKeyArray, CommandConvertValidString, CommandDirectoryFile, CommandDownloadFileHttp, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFindElementHtmlAll, CommandFor, CommandGetAtrHtml, CommandGetInnerHtml, CommandInitVar, CommandMappigJson, CommandReplaceAll, CommandSql, ConstuctorBody } from "@src/constuctor.module/constuctor.interface";
+import { Command, CommandAction, CommandConnectionDatabase, CommandConvertInDom, CommandConvertListInKeyArray, CommandConvertValidString, CommandDirectoryFile, CommandDownloadFileHttp, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFindElementHtmlAll, CommandFor, CommandGetAtrHtml, CommandGetInnerHtml, CommandInitVar, CommandMappigJson, CommandReplaceAll, CommandSql, CommandWebElementClick, CommandWebGetInnerHTML, CommandWebOpen, ConstuctorBody } from "@src/constuctor.module/constuctor.interface";
 
 import { dbService } from "@src/db.module/db.module";
 import { fileService } from "@src/file.module/file.module";
@@ -9,6 +9,7 @@ import { forService } from "@src/for.module/for.module";
 import { htmlService } from "@src/html.module/html.service";
 import { convertService } from "@src/libs.module/libs.module";
 import { ifsService } from "@src/ifs.module/ifs.service";
+import { webService } from "@src/web.module/web.service";
 
 class ConstuctorService {
 
@@ -31,8 +32,34 @@ class ConstuctorService {
         [CommandAction.CONVERT_REPLACE_ALL]: this.convertReplaceAll,
         [CommandAction.DOWNLOAD_FILE_HTTP]: this.downloadFileHttp,
         [CommandAction.CONVERT_LIST_IN_KEY_ARRAY]: this.сonvertListInKeyArray,
+        [CommandAction.WEB_OPEN]: this.webOpen,
+        [CommandAction.WEB_ELEMENT_CLICK]: this.webElementClick,
+        [CommandAction.WEB_ELEMENT_INNER_HTML]: this.webGetInnerHtml,
     }
 
+
+    // получить html из веб браузера
+    private async webGetInnerHtml(command: Command) {
+        const commandWebElementClick = command as CommandWebGetInnerHTML;
+        const page = storeConfigService.getElementStoreConfigConstructor(commandWebElementClick.webGetInnerHTML.page);
+        const selector = storeConfigService.getElementStoreConfigConstructor(commandWebElementClick.webGetInnerHTML.selector);
+        return await webService.innerHtmlELement(page, selector);
+    }
+
+    // Нажать на элемент в веб браузере
+    private async webElementClick(command: Command) {
+        const commandWebElementClick = command as CommandWebElementClick;
+        const page = storeConfigService.getElementStoreConfigConstructor(commandWebElementClick.webElementClick.page);
+        const selector = storeConfigService.getElementStoreConfigConstructor(commandWebElementClick.webElementClick.selector);
+        return await webService.elementClick(page, selector);
+    }
+
+    // открыть веб браузер
+    private async webOpen(command: Command) {
+        const commandWebOpen = command as CommandWebOpen;
+        const url = storeConfigService.getElementStoreConfigConstructor(commandWebOpen.webOpen.url);
+        return await webService.openWeb(url);
+    }
 
     // файл конфига выполнить
     private async fileConfig(command: Command) {
@@ -212,7 +239,7 @@ class ConstuctorService {
             }
 
             let resultCommand = null;
-            resultCommand = this.commandAction[command.action](command);
+            resultCommand = await this.commandAction[command.action](command);
             storeConfigService.setStore(command, resultCommand, command.name);
         }
     }
