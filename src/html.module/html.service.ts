@@ -18,6 +18,10 @@ class HtmlService {
         return html.querySelector(selector)?.innerHTML;
     }
 
+    getTextContent(selector: string, html: HTMLElement) {
+        return html.querySelector(selector)?.textContent;
+    }
+
     getAtrHtml(selector: string, nameArt: string, html: HTMLElement) {
         return html.querySelector(selector)?.getAttribute(nameArt);
     }

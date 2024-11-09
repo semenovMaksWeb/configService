@@ -1,4 +1,4 @@
-import { Command, CommandAction, CommandConnectionDatabase, CommandConvertInDom, CommandConvertListInKeyArray, CommandConvertValidString, CommandDirectoryFile, CommandDownloadFileHttp, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFindElementHtmlAll, CommandFor, CommandGetAtrHtml, CommandGetInnerHtml, CommandInitVar, CommandMappigJson, CommandReplaceAll, CommandSql, CommandWebElementClick, CommandWebGetInnerHTML, CommandWebOpen, ConstuctorBody } from "@src/constuctor.module/constuctor.interface";
+import { Command, CommandAction, CommandConnectionDatabase, CommandConvertInDom, CommandConvertListInKeyArray, CommandConvertValidString, CommandDirectoryFile, CommandDownloadFileHttp, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFindElementHtmlAll, CommandFor, CommandGetAtrHtml, CommandGetInnerHtml, CommandGetTextContent, CommandInitVar, CommandMappigJson, CommandReplaceAll, CommandSql, CommandWebElementClick, CommandWebGetInnerHTML, CommandWebOpen, ConstuctorBody } from "@src/constuctor.module/constuctor.interface";
 
 import { dbService } from "@src/db.module/db.module";
 import { fileService } from "@src/file.module/file.module";
@@ -33,10 +33,18 @@ class ConstuctorService {
         [CommandAction.DOWNLOAD_FILE_HTTP]: this.downloadFileHttp,
         [CommandAction.CONVERT_LIST_IN_KEY_ARRAY]: this.сonvertListInKeyArray,
         [CommandAction.WEB_OPEN]: this.webOpen,
-        [CommandAction.WEB_ELEMENT_CLICK]: this.webElementClick,
+        [CommandAction.WEB_ELEMENT_CLICK]: this.webElementClick, 
         [CommandAction.WEB_ELEMENT_INNER_HTML]: this.webGetInnerHtml,
+        [CommandAction.GET_TEXT_CONTENT]: this.getTextContent
     }
 
+    // получить из html у элемента textContent
+    private getTextContent(command: Command) {
+        const commandGetTextContent = command as CommandGetTextContent;
+        const html = storeConfigService.getElementStoreConfigConstructor(commandGetTextContent.getTextContent.html);
+        const selector = storeConfigService.getElementStoreConfigConstructor(commandGetTextContent.getTextContent.selector);
+        return htmlService.getTextContent(selector, html);
+    }
 
     // получить html из веб браузера
     private async webGetInnerHtml(command: Command) {

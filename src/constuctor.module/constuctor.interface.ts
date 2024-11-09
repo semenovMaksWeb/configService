@@ -22,6 +22,7 @@ export enum CommandAction {
     FIND_ELEMENT_HTML_ALL = "findElementHtmlAll", // найти в html все element по selector
     GET_INNER_HTML = "getInnerHtml", // получить текст и html с dom-element
     GET_ATR_HTML = "getAtrHtml", // получить атрибут с dom-element
+    GET_TEXT_CONTENT = "getTextContent", // получения с dom-element textContent
 
     CONVERT_VALID_STRING = "convertValidString", // убрать лишние пробелы и переносы из строки
     CONVERT_REPLACE_ALL = "convertReplaceAll", // замена символов в строке
@@ -145,6 +146,10 @@ export interface CommandGetInnerHtml extends Command {
 export interface CommandGetAtrHtml extends Command {
     getAtrHtml: CommandHtmlGetAtr
 }
+export interface CommandGetTextContent extends Command {
+    getTextContent: CommandHtml
+}
+
 
 export interface CommandConvertInDom extends Command {
     convertInDom: {
