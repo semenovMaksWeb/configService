@@ -134,7 +134,7 @@ type CommandHtml = {
 
 type CommandHtmlGetAtr = CommandHtml & { nameArt: StoreConfigElement }
 
-export interface CommandMappigJson extends Command {
+export interface CommandMappingJson extends Command {
     params: {
         json: StoreConfigElement,
         schema: JsonMappingSchema[]

@@ -1,4 +1,4 @@
-import { Command, CommandAction, CommandConnectionDatabase, CommandConvertInDom, CommandConvertListInKeyArray, CommandConvertValidString, CommandDirectoryFile, CommandDownloadFileHttp, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFindElementHtmlAll, CommandFor, CommandGetAtrHtml, CommandGetInnerHtml, CommandGetTextContent, CommandInitVar, CommandMappigJson, CommandReplaceAll, CommandSql, CommandWebElementClick, CommandWebGetInnerHTML, CommandWebOpen, ConstuctorBody } from "@src/constuctor.module/constuctor.interface";
+import { Command, CommandAction, CommandConnectionDatabase, CommandConvertInDom, CommandConvertListInKeyArray, CommandConvertValidString, CommandDirectoryFile, CommandDownloadFileHttp, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFindElementHtmlAll, CommandFor, CommandGetAtrHtml, CommandGetInnerHtml, CommandGetTextContent, CommandInitVar, CommandMappingJson, CommandReplaceAll, CommandSql, CommandWebElementClick, CommandWebGetInnerHTML, CommandWebOpen, ConstuctorBody } from "@src/constuctor.module/constuctor.interface";
 
 import { dbService } from "@src/db.module/db.module";
 import { fileService } from "@src/file.module/file.module";
@@ -105,7 +105,7 @@ class ConstuctorService {
 
     // парсинг json в др формат json
     private mappingJson(command: Command) {
-        const commandMappingJson = command as CommandMappigJson;
+        const commandMappingJson = command as CommandMappingJson;
         const json = storeConfigService.getElementStoreConfigConstructor(commandMappingJson.params.json);
         const result = jsonService.mappingJson(json, commandMappingJson.params.schema);
         loggerService.info("Выполнено mapping json", { config: { name: command.name }, result });
