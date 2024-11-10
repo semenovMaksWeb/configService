@@ -53,14 +53,14 @@ export interface Command {
 }
 
 export interface CommandConvertListInKeyArray extends Command {
-    convertListInKeyArray: {
+    params: {
         key: StoreConfigElement,
         list: StoreConfigElement
     }
 }
 
 export interface CommandDownloadFileHttp extends Command {
-    downloadFileHttp: {
+    params: {
         path: StoreConfigElement,
         url: StoreConfigElement,
         fileName: StoreConfigElement,
@@ -68,7 +68,7 @@ export interface CommandDownloadFileHttp extends Command {
 }
 
 export interface CommandReplaceAll extends Command {
-    convertReplaceAll: {
+    params: {
         string: StoreConfigElement,
         searchString: StoreConfigElement,
         replaceString: StoreConfigElement,
@@ -76,21 +76,25 @@ export interface CommandReplaceAll extends Command {
 }
 
 export interface CommandConvertValidString extends Command {
-    convertValidString: {
+    params: {
         string: StoreConfigElement
     }
 }
 
 export interface CommandInitVar extends Command {
-    initVar: StoreConfigElement
+    params: {
+        initVar: StoreConfigElement
+    }
 }
 
 export interface CommandConnectionDatabase extends Command {
-    connection: StoreConfig[]
+    params: {
+        connection: StoreConfig[]
+    }
 }
 
 export interface CommandSql extends Command {
-    sql: {
+    params: {
         type: StoreConfigElement,
         connection: StoreConfigElement,
         query: string;
@@ -99,7 +103,9 @@ export interface CommandSql extends Command {
 }
 
 export interface CommandFileRead extends Command {
-    path: StoreConfigElement;
+    params: {
+        path: StoreConfigElement;
+    }
 }
 
 export interface CommandFileConfig extends CommandFileRead { }
@@ -107,14 +113,14 @@ export interface CommandFileConfig extends CommandFileRead { }
 export interface CommandDirectoryFile extends CommandFileRead { }
 
 export interface CommandFileWrite extends Command {
-    fileWrite: {
+    params: {
         path: StoreConfigElement;
         data: StoreConfigElement;
     }
 }
 
 export interface CommandFor extends Command {
-    for: {
+    params: {
         item: string | string[],
         array: StoreConfigElement,
         config: Command[],
@@ -129,48 +135,48 @@ type CommandHtml = {
 type CommandHtmlGetAtr = CommandHtml & { nameArt: StoreConfigElement }
 
 export interface CommandMappigJson extends Command {
-    mappingJson: {
+    params: {
         json: StoreConfigElement,
         schema: JsonMappingSchema[]
     }
 }
 
 export interface CommandFindElementHtmlAll extends Command {
-    findElementHtmlAll: CommandHtml
+    params: CommandHtml
 }
 
 export interface CommandGetInnerHtml extends Command {
-    getInnerHtml: CommandHtml
+    params: CommandHtml
 }
 
 export interface CommandGetAtrHtml extends Command {
-    getAtrHtml: CommandHtmlGetAtr
+    params: CommandHtmlGetAtr
 }
 export interface CommandGetTextContent extends Command {
-    getTextContent: CommandHtml
+    params: CommandHtml
 }
 
 
 export interface CommandConvertInDom extends Command {
-    convertInDom: {
+    params: {
         html: StoreConfigElement
     }
 }
 
 export interface CommandWebOpen extends Command {
-    webOpen: {
+    params: {
         url: StoreConfigElement
     }
 }
 export interface CommandWebElementClick extends Command {
-    webElementClick: {
+    params: {
         page: StoreConfigElement,
         selector: StoreConfigElement
     }
 }
 
 export interface CommandWebGetInnerHTML extends Command {
-    webGetInnerHTML: {
+    params: {
         page: StoreConfigElement,
         selector: StoreConfigElement
     }

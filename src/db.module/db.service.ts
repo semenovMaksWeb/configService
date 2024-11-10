@@ -36,17 +36,17 @@ class DBService {
     }
 
     public async sqlCall(commandSql: CommandSql) {
-        const connection = storeConfigService.getElementStoreConfigConstructor(commandSql.sql.connection);
-        const paramsSql = storeConfigService.getStoreConfigArray(commandSql.sql.params);
-        const typeBd = storeConfigService.getElementStoreConfigConstructor(commandSql.sql.type) as ConnectionDB;
+        const connection = storeConfigService.getElementStoreConfigConstructor(commandSql.params.connection);
+        const paramsSql = storeConfigService.getStoreConfigArray(commandSql.params.params);
+        const typeBd = storeConfigService.getElementStoreConfigConstructor(commandSql.params.type) as ConnectionDB;
 
         const connectionBd = this.getConnectionBd(typeBd);
 
         try {
-            return await connectionBd.sqlCall(connection, commandSql.sql.query, paramsSql);
+            return await connectionBd.sqlCall(connection, commandSql.params.query, paramsSql);
         } catch (error) {
             if (error instanceof Error) {
-                loggerService.error(`Ошибка при вызове SQL: ${error.message}`, { config: { sql: commandSql.sql.query, name: commandSql.name } })
+                loggerService.error(`Ошибка при вызове SQL: ${error.message}`, { config: { sql: commandSql.params.query, name: commandSql.name } })
                 throw new Error(`Ошибка при вызове SQL: ${error.message}`);
             }
         }

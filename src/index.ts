@@ -8,10 +8,10 @@ dotenv.config();
 (async () => {
     await constuctorService.runConfig(configTest as Command[], {
         categories: {
-            webHtml: true,
-            pasring: false,
-            db: false,
-
+            webHtml: false,
+            parsing: false,
+            db: true,
+            isDowload: false,           
         }
     });
     console.log(storeService.getAllStore());

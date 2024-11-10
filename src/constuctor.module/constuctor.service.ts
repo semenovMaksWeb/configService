@@ -16,16 +16,16 @@ class ConstuctorService {
     // получить из html у элемента textContent
     private getTextContent(command: Command) {
         const commandGetTextContent = command as CommandGetTextContent;
-        const html = storeConfigService.getElementStoreConfigConstructor(commandGetTextContent.getTextContent.html);
-        const selector = storeConfigService.getElementStoreConfigConstructor(commandGetTextContent.getTextContent.selector);
+        const html = storeConfigService.getElementStoreConfigConstructor(commandGetTextContent.params.html);
+        const selector = storeConfigService.getElementStoreConfigConstructor(commandGetTextContent.params.selector);
         return htmlService.getTextContent(selector, html);
     }
 
     // получить html из веб браузера
     private async webGetInnerHtml(command: Command) {
         const commandWebElementClick = command as CommandWebGetInnerHTML;
-        const page = storeConfigService.getElementStoreConfigConstructor(commandWebElementClick.webGetInnerHTML.page);
-        const selector = storeConfigService.getElementStoreConfigConstructor(commandWebElementClick.webGetInnerHTML.selector);
+        const page = storeConfigService.getElementStoreConfigConstructor(commandWebElementClick.params.page);
+        const selector = storeConfigService.getElementStoreConfigConstructor(commandWebElementClick.params.selector);
         const result = await webService.innerHtmlELement(page, selector);
         loggerService.info("Получения html из браузера", [{ config: { name: command.name, selector: selector, result: result } }]);
         return result;
@@ -34,8 +34,8 @@ class ConstuctorService {
     // Нажать на элемент в веб браузере
     private async webElementClick(command: Command) {
         const commandWebElementClick = command as CommandWebElementClick;
-        const page = storeConfigService.getElementStoreConfigConstructor(commandWebElementClick.webElementClick.page);
-        const selector = storeConfigService.getElementStoreConfigConstructor(commandWebElementClick.webElementClick.selector);
+        const page = storeConfigService.getElementStoreConfigConstructor(commandWebElementClick.params.page);
+        const selector = storeConfigService.getElementStoreConfigConstructor(commandWebElementClick.params.selector);
         loggerService.info("Клик на элемент в браузере", [{ config: { name: command.name, selector: selector } }]);
         await webService.elementClick(page, selector);
     }
@@ -43,7 +43,7 @@ class ConstuctorService {
     // открыть веб браузер
     private async webOpen(command: Command) {
         const commandWebOpen = command as CommandWebOpen;
-        const url = storeConfigService.getElementStoreConfigConstructor(commandWebOpen.webOpen.url);
+        const url = storeConfigService.getElementStoreConfigConstructor(commandWebOpen.params.url);
         const result = await webService.openWeb(url);
         loggerService.info("Открытия браузера", [{ config: { name: command.name, url: url } }]);
         return result;
@@ -52,19 +52,19 @@ class ConstuctorService {
     // файл конфига выполнить
     private fileConfig = async (command: Command) => {
         const commandFileConfig = command as CommandFileConfig;
-        const path = `${process.env.CONFIG_CATALOG}${commandFileConfig.path}`;
+        const path = `${process.env.CONFIG_CATALOG}${commandFileConfig.params.path}`;
         const configFile = await fileService.readFile(path);
         const jsonConfig = JSON.parse(configFile.toString());
-        loggerService.info("Начало конфига из файла", [{ config: { path: commandFileConfig.path, name: command.name } }]);
+        loggerService.info("Начало конфига из файла", [{ config: { path: commandFileConfig.params.path, name: command.name } }]);
         await this.runConfig(jsonConfig, undefined, true);
-        loggerService.info("Конец конфига из файла", [{ config: { path: commandFileConfig.path, name: command.name } }]);
+        loggerService.info("Конец конфига из файла", [{ config: { path: commandFileConfig.params.path, name: command.name } }]);
     }
 
     // подключение к бд
     private connectionDatabase(command: Command) {
         const commandConnectionDatabase = command as CommandConnectionDatabase;
-        const result = dbService.connectionDatabase(commandConnectionDatabase.connection);
-        loggerService.info("Выполнено подключение к бд", [{ config: { name: command.name, connection: commandConnectionDatabase.connection } }]);
+        const result = dbService.connectionDatabase(commandConnectionDatabase.params.connection);
+        loggerService.info("Выполнено подключение к бд", [{ config: { name: command.name, connection: commandConnectionDatabase.params.connection } }]);
         return result;
     }
 
@@ -72,14 +72,14 @@ class ConstuctorService {
     private async sqlCall(command: Command) {
         const commandSql = command as CommandSql;
         const result = await dbService.sqlCall(commandSql);
-        loggerService.info("Выполнен sql запрос", [{ config: { sql: commandSql.sql.query, name: command.name } }]);
+        loggerService.info("Выполнен sql запрос", [{ config: { sql: commandSql.params.query, name: command.name } }]);
         return result;
     }
 
     // чтения файла
     private async readFile(command: Command) {
         const commandFileRead = command as CommandFileRead;
-        const path = storeConfigService.getElementStoreConfigConstructor(commandFileRead.path) as string;
+        const path = storeConfigService.getElementStoreConfigConstructor(commandFileRead.params.path) as string;
         const result = await fileService.readFile(path);
         loggerService.info("Выполнено чтения файла", { config: { path: path, name: command.name } });
         return result;
@@ -88,8 +88,8 @@ class ConstuctorService {
     // запись в файл
     private async writeFile(command: Command) {
         const commandFileWrite = command as CommandFileWrite;
-        const path = storeConfigService.getElementStoreConfigConstructor(commandFileWrite.fileWrite.path);
-        const data = storeConfigService.getElementStoreConfigConstructor(commandFileWrite.fileWrite.data);
+        const path = storeConfigService.getElementStoreConfigConstructor(commandFileWrite.params.path);
+        const data = storeConfigService.getElementStoreConfigConstructor(commandFileWrite.params.data);
         await fileService.writeFile(path, data);
         loggerService.info("Выполнено записи файла", { config: { path: path, name: command.name } });
     }
@@ -97,7 +97,7 @@ class ConstuctorService {
     // чтение файлов в каталоге
     private async directoryFile(command: Command) {
         const commandDirectoryFile = command as CommandDirectoryFile;
-        const path = storeConfigService.getElementStoreConfigConstructor(commandDirectoryFile.path);
+        const path = storeConfigService.getElementStoreConfigConstructor(commandDirectoryFile.params.path);
         const result = await fileService.directoryFile(path);
         loggerService.info("Выполнено получения путей файлов в каталоге", { config: { path: path, name: command.name }, result });
         return result;
@@ -106,8 +106,8 @@ class ConstuctorService {
     // парсинг json в др формат json
     private mappingJson(command: Command) {
         const commandMappingJson = command as CommandMappigJson;
-        const json = storeConfigService.getElementStoreConfigConstructor(commandMappingJson.mappingJson.json);
-        const result = jsonService.mappingJson(json, commandMappingJson.mappingJson.schema);
+        const json = storeConfigService.getElementStoreConfigConstructor(commandMappingJson.params.json);
+        const result = jsonService.mappingJson(json, commandMappingJson.params.schema);
         loggerService.info("Выполнено mapping json", { config: { name: command.name }, result });
         return result;
     }
@@ -115,7 +115,7 @@ class ConstuctorService {
     // иницилизация или изменение переменной
     private initVar(command: Command) {
         const commandInitVar = command as CommandInitVar;
-        const result = storeConfigService.getElementStoreConfigConstructor(commandInitVar.initVar);
+        const result = storeConfigService.getElementStoreConfigConstructor(commandInitVar.params.initVar);
         loggerService.info("Выполнена иницилизация переменной", { config: { name: command.name }, result });
         return result;
     }
@@ -131,7 +131,7 @@ class ConstuctorService {
     // из строки в dom
     private convertInDom(command: Command) {
         const commandConvertInDom = command as CommandConvertInDom;
-        const html = storeConfigService.getElementStoreConfigConstructor(commandConvertInDom.convertInDom.html);
+        const html = storeConfigService.getElementStoreConfigConstructor(commandConvertInDom.params.html);
         const result = htmlService.convertStringInDom(html);
         loggerService.info("выполнена конвертация из строки в html", { config: { name: command.name } });
         return result;
@@ -140,8 +140,8 @@ class ConstuctorService {
     // найди множество элементов по selector
     private findElementHtmlAll(command: Command) {
         const commandFindElementHtmlAll = command as CommandFindElementHtmlAll;
-        const html = storeConfigService.getElementStoreConfigConstructor(commandFindElementHtmlAll.findElementHtmlAll.html);
-        const selector = storeConfigService.getElementStoreConfigConstructor(commandFindElementHtmlAll.findElementHtmlAll.selector);
+        const html = storeConfigService.getElementStoreConfigConstructor(commandFindElementHtmlAll.params.html);
+        const selector = storeConfigService.getElementStoreConfigConstructor(commandFindElementHtmlAll.params.selector);
         const result = htmlService.findElementHtmlAll(selector, html);
         loggerService.info("выполнен поиск списка элемента в html", { config: { name: command.name } })
         return result;
@@ -150,8 +150,8 @@ class ConstuctorService {
     // из dom-element получить его содержимое
     private getInnerHtml(command: Command) {
         const commandGetInnerHtml = command as CommandGetInnerHtml;
-        const html = storeConfigService.getElementStoreConfigConstructor(commandGetInnerHtml.getInnerHtml.html);
-        const selector = storeConfigService.getElementStoreConfigConstructor(commandGetInnerHtml.getInnerHtml.selector);
+        const html = storeConfigService.getElementStoreConfigConstructor(commandGetInnerHtml.params.html);
+        const selector = storeConfigService.getElementStoreConfigConstructor(commandGetInnerHtml.params.selector);
         const result = htmlService.getInnerHtml(selector, html);
         loggerService.info("Получения текста с html", { config: { name: command.name }, result })
         return result;
@@ -160,9 +160,9 @@ class ConstuctorService {
     // из dom-element получить атрибут
     private getAtrHtml(command: Command) {
         const commandGetAtrHtml = command as CommandGetAtrHtml;
-        const html = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.html);
-        const selector = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.selector);
-        const nameAtr = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.getAtrHtml.nameArt);
+        const html = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.params.html);
+        const selector = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.params.selector);
+        const nameAtr = storeConfigService.getElementStoreConfigConstructor(commandGetAtrHtml.params.nameArt);
         const result = htmlService.getAtrHtml(selector, nameAtr, html);
         loggerService.info("Получения артибута с html", { config: { name: command.name }, result })
         return result;
@@ -171,7 +171,7 @@ class ConstuctorService {
     //убрать из строки переносы и множ. пробелы CONVERT_VALID_STRING
     private convertValidString(command: Command) {
         const commandConvertValidString = command as CommandConvertValidString;
-        const string = storeConfigService.getElementStoreConfigConstructor(commandConvertValidString.convertValidString.string);
+        const string = storeConfigService.getElementStoreConfigConstructor(commandConvertValidString.params.string);
         const result = convertService.convertValidString(string);
         loggerService.info("Конвертация строки скрытие лишних переносов пробелов и табуляции", { config: { name: command.name }, result });
         return result;
@@ -180,9 +180,9 @@ class ConstuctorService {
     // поиск с заменой символов в строке
     private convertReplaceAll(command: Command) {
         const commandConvertReplaceAll = command as CommandReplaceAll;
-        const string = storeConfigService.getElementStoreConfigConstructor(commandConvertReplaceAll.convertReplaceAll.string);
-        const searchString = storeConfigService.getElementStoreConfigConstructor(commandConvertReplaceAll.convertReplaceAll.searchString);
-        const replaceString = storeConfigService.getElementStoreConfigConstructor(commandConvertReplaceAll.convertReplaceAll.replaceString);
+        const string = storeConfigService.getElementStoreConfigConstructor(commandConvertReplaceAll.params.string);
+        const searchString = storeConfigService.getElementStoreConfigConstructor(commandConvertReplaceAll.params.searchString);
+        const replaceString = storeConfigService.getElementStoreConfigConstructor(commandConvertReplaceAll.params.replaceString);
         loggerService.info("Замена символов в строке", { config: { name: command.name } });
         const result = convertService.convertReplaceAll(string, searchString, replaceString);
         return result;
@@ -191,9 +191,9 @@ class ConstuctorService {
     // скачать файл по http и сохранить 
     private async downloadFileHttp(command: Command) {
         const commandDownloadFileHttp = command as CommandDownloadFileHttp;
-        const url = storeConfigService.getElementStoreConfigConstructor(commandDownloadFileHttp.downloadFileHttp.url);
-        const path = storeConfigService.getElementStoreConfigConstructor(commandDownloadFileHttp.downloadFileHttp.path);
-        const fileName = storeConfigService.getElementStoreConfigConstructor(commandDownloadFileHttp.downloadFileHttp.fileName);
+        const url = storeConfigService.getElementStoreConfigConstructor(commandDownloadFileHttp.params.url);
+        const path = storeConfigService.getElementStoreConfigConstructor(commandDownloadFileHttp.params.path);
+        const fileName = storeConfigService.getElementStoreConfigConstructor(commandDownloadFileHttp.params.fileName);
         await fileService.downloadFileHttp(url, path, fileName);
         loggerService.info("Скачен файл и сохранен", { config: { name: command.name, url, path, fileName } });
     }
@@ -201,8 +201,8 @@ class ConstuctorService {
     // Получения массива из массива объектов по ключу
     private сonvertListInKeyArray(command: Command) {
         const commandConvertListInKeyArray = command as CommandConvertListInKeyArray;
-        const key = storeConfigService.getElementStoreConfigConstructor(commandConvertListInKeyArray.convertListInKeyArray.key);
-        const list = storeConfigService.getElementStoreConfigConstructor(commandConvertListInKeyArray.convertListInKeyArray.list);
+        const key = storeConfigService.getElementStoreConfigConstructor(commandConvertListInKeyArray.params.key);
+        const list = storeConfigService.getElementStoreConfigConstructor(commandConvertListInKeyArray.params.list);
         const result = convertService.convertListInKeyArray(list, key);
         loggerService.info("Получен массива из массива объектов по ключу", { config: { name: command.name }, result });
         return result;

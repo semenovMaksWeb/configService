@@ -3,10 +3,10 @@ import { storeConfigService } from "@src/store.module/store.module";
 
 class ForService {
     async for(commandFor: CommandFor) {
-        const array = storeConfigService.getElementStoreConfigConstructor(commandFor.for.array);
+        const array = storeConfigService.getElementStoreConfigConstructor(commandFor.params.array);
         for (const element of array) {
-            storeConfigService.setStore(commandFor, element, commandFor.for.item);
-            await constuctorService.runConfig(commandFor.for.config, undefined, true);
+            storeConfigService.setStore(commandFor, element, commandFor.params.item);
+            await constuctorService.runConfig(commandFor.params.config, undefined, true);
         }
     }
 }
