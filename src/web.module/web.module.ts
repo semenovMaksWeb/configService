@@ -1,0 +1,1 @@
+export { webService } from "@src/web.module/web.service"

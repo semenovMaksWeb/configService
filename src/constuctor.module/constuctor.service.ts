@@ -1,4 +1,3 @@
-import { Command, CommandAction, CommandConnectionDatabase, CommandConvertInDom, CommandConvertListInKeyArray, CommandConvertValidString, CommandDirectoryFile, CommandDownloadFileHttp, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFindElementHtmlAll, CommandFor, CommandGetAtrHtml, CommandGetInnerHtml, CommandGetTextContent, CommandInitVar, CommandMappingJson, CommandReplaceAll, CommandSql, CommandWebElementClick, CommandWebGetInnerHTML, CommandWebOpen, ConstuctorBody } from "@src/constuctor.module/constuctor.interface";
 
 import { dbService } from "@src/db.module/db.module";
 import { fileService } from "@src/file.module/file.module";
@@ -6,10 +5,11 @@ import { storeConfigService } from "@src/store.module/store.module";
 import { jsonService } from "@src/json.module/json.module";
 import { loggerService } from "@src/logger.module/logger.module";
 import { forService } from "@src/for.module/for.module";
-import { htmlService } from "@src/html.module/html.service";
+import { htmlService } from "@src/html.module/html.module";
 import { convertService } from "@src/libs.module/libs.module";
-import { ifsService } from "@src/ifs.module/ifs.service";
-import { webService } from "@src/web.module/web.service";
+import { ifsService } from "@src/ifs.module/ifs.module";
+import { webService } from "@src/web.module/web.module";
+import { Command, CommandAction, CommandConnectionDatabase, CommandConvertInDom, CommandConvertListInKeyArray, CommandConvertValidString, CommandDirectoryFile, CommandDownloadFileHttp, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFindElementHtmlAll, CommandFor, CommandGetAtrHtml, CommandGetInnerHtml, CommandGetTextContent, CommandInitVar, CommandMappingJson, CommandReplaceAll, CommandSql, CommandWebElementClick, CommandWebGetInnerHTML, CommandWebOpen, ConstuctorBody } from "configRepoInterface";
 
 class ConstuctorService {
 

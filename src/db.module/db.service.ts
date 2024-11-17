@@ -1,9 +1,8 @@
 import { StoreConfig, storeConfigService } from "@src/store.module/store.module";
-import { ConnectionDB, DBConfigResult } from "@src/db.module/db.interface";
 import { pgService } from "@src/db.module/pg/pg.service";
-import { CommandSql } from "@src/constuctor.module/constuctor.interface";
 import { mySqlService } from "@src/db.module/mySql/mySql.service";
 import { loggerService } from "@src/logger.module/logger.service";
+import { CommandSql, ConnectionDB, DBConfigResult } from "configRepoInterface";
 
 class DBService {
 

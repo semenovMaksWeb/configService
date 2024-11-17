@@ -1,5 +1,6 @@
 import { TypeVarEnum } from "@src/libs.module/libs.module";
-import { JsonMappingSchema } from "@src/json.module/json.interface";
+import { JsonMappingSchema } from "configRepoInterface";
+
 
 class JsonService {
     public jsonToString(object: any) {
@@ -8,7 +9,7 @@ class JsonService {
 
     public stringToJson(string: string) {
         console.trace(1);
-        
+
         return JSON.parse(string);
     }
 

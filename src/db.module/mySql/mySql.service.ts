@@ -1,5 +1,5 @@
+import { DBConfigResult } from "configRepoInterface";
 import mysql, { Pool } from "mysql2"
-import { DBConfigResult } from "@src/db.module/db.interface";
 
 class MySqlService {
     public connection(bdConfigResult: DBConfigResult) {

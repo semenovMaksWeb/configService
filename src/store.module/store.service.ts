@@ -1,4 +1,5 @@
-import { Store } from "@src/store.module/store.interface";
+import { Store } from "configRepoInterface";
+
 
 class StoreService {
     private store: Store = {}

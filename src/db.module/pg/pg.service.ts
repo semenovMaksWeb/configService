@@ -1,6 +1,6 @@
+import { DBConfigResult } from "configRepoInterface";
 import { Pool } from "pg"
-import { DBConfigResult } from "@src/db.module/db.interface";
-
+ 
 class PgService {
     public connection(bdConfigResult: DBConfigResult) {
         return new Pool({

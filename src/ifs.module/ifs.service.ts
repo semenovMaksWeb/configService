@@ -1,5 +1,5 @@
 import { StoreConfigElement, storeConfigService } from "@src/store.module/store.module";
-import { ifsOperator, IfsRunConfig, OperatorAction, OperatorConfig } from "./ifs.interface";
+import { ifsOperator, IfsRunConfig, OperatorAction, OperatorConfig } from "configRepoInterface";
 
 class IfsService {
     private operatorAction: OperatorAction = {
@@ -20,7 +20,7 @@ class IfsService {
             value1 = storeConfigService.getElementStoreConfigConstructor(value1 as StoreConfigElement);
             value2 = value2 as OperatorConfig;
             value3 = storeConfigService.getElementStoreConfigConstructor(value3 as StoreConfigElement);
-            
+
             if (!value2.operator) {
                 throw new Error("Невалидный конфиг оператора не указан");
             }

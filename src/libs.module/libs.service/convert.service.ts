@@ -1,5 +1,4 @@
-import { TypeVarEnum } from "@src/libs.module/list.type/libs.enum";
-import { StoreConvert } from "@src/store.module/store.config/store.config.interface";
+import { StoreConvert, TypeVarEnum } from "configRepoInterface";
 
 class ConvertService {
     public convertVar(value: any, convert: StoreConvert) {

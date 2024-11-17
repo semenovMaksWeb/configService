@@ -1,9 +1,8 @@
-import { StoreConfig, StoreConfigElement } from "@src/store.module/store.config/store.config.interface";
-import { Store } from "@src/store.module/store.interface";
 import { storeService } from "@src/store.module/store.service";
 
 import { Command, CommandResultOperator, ConstuctorBody } from "@src/constuctor.module/constuctor.module";
 import { convertService } from "@src/libs.module/libs.module";
+import { Store, StoreConfig, StoreConfigElement } from "configRepoInterface";
 
 class StoreConfigService {
     public getStoreConfigObject(storeConfigList: StoreConfig[]) {
