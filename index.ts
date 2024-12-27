@@ -12,4 +12,4 @@ export const configCore = {
     htmlService,
     webService,
     convertService
-}
+}   
