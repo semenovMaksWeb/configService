@@ -11,14 +11,21 @@
             "es6",
             "ES2021"
         ],
+        "moduleResolution": "node",
         "allowJs": true,
-        "outDir": "build",
-        "rootDir": "src",
+        "outDir": "dist",
+        "resolveJsonModule": true,
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "sourceMap": true,
         "strict": true,
         "noImplicitAny": true,
-        "esModuleInterop": true,
-        "resolveJsonModule": true
     },
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"
+    ],
     "ts-node": {
         "require": [
             "tsconfig-paths/register"
