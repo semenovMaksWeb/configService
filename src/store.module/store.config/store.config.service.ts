@@ -1,7 +1,6 @@
 import { storeService } from "@src/store.module/store.service";
 
-import { Command, ConstuctorBody } from "@src/constuctor.module/constuctor.module";
-import type { CommandResultOperator } from "@src/constuctor.module/constuctor.module"
+import { Command, ConstuctorBody, CommandResultOperator } from "@src/constuctor.module/constuctor.module";
 import { convertService } from "@src/libs.module/libs.module";
 import { Store, StoreConfig, StoreConfigElement } from "configRepoInterface";
 
