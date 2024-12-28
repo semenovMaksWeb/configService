@@ -1,0 +1,1 @@
+export { axiosService } from "@src/axios.module/axios.service"
