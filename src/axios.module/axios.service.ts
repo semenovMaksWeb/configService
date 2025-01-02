@@ -1,17 +1,20 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { StoreConfig, StoreConfigElement } from "configRepoInterface";
-
-interface CommandAxios {
-    type: StoreConfigElement,
-    params?: StoreConfig[],
-    headers?: StoreConfig[],
-    data?: StoreConfig[],
-
-}
 
 class AxiosService {
-    public configRunAxios() {
 
+    public async runAxios(url: string, type: string, data: any, config: any) {
+        switch (type) {
+            case "post":
+                return await this.postAxios(url, data, config);
+            case "get":
+                return await this.getAxios(url, config);
+
+            case "delete":
+                return await this.deleteAxios(url, config);
+
+            case "put":
+                return await this.putAxios(url, data, config);
+        }
     }
 
     public async getAxios(url: string, config: AxiosRequestConfig) {

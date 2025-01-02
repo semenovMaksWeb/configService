@@ -9,7 +9,8 @@ import { htmlService } from "@src/html.module/html.module";
 import { convertService } from "@src/libs.module/libs.module";
 import { ifsService } from "@src/ifs.module/ifs.module";
 import { webService } from "@src/web.module/web.module";
-import { Command, CommandAction, CommandConnectionDatabase, CommandConvertInDom, CommandConvertListInKeyArray, CommandConvertValidString, CommandDirectoryFile, CommandDownloadFileHttp, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFindElementHtmlAll, CommandFor, CommandGetAtrHtml, CommandGetInnerHtml, CommandGetTextContent, CommandInitVar, CommandMappingJson, CommandReplaceAll, CommandSql, CommandWebElementClick, CommandWebGetInnerHTML, CommandWebOpen, ConstuctorBody } from "configRepoInterface";
+import { Command, CommandAction, CommandAxios, CommandConnectionDatabase, CommandConvertInDom, CommandConvertListInKeyArray, CommandConvertValidString, CommandDirectoryFile, CommandDownloadFileHttp, CommandFileConfig, CommandFileRead, CommandFileWrite, CommandFindElementHtmlAll, CommandFor, CommandGetAtrHtml, CommandGetInnerHtml, CommandGetTextContent, CommandInitVar, CommandMappingJson, CommandReplaceAll, CommandSql, CommandWebElementClick, CommandWebGetInnerHTML, CommandWebOpen, ConstuctorBody } from "configRepoInterface";
+import { axiosService } from "@src/axios.module/axios.service";
 
 class ConstuctorService {
 
@@ -208,6 +209,19 @@ class ConstuctorService {
         return result;
     }
 
+    private async axiosHttp(command: Command) {
+        const commandAxios = command as CommandAxios;
+        const url = storeConfigService.getElementStoreConfigConstructor(commandAxios.params.url);
+        const type = storeConfigService.getElementStoreConfigConstructor(commandAxios.params.type);
+        const data = commandAxios?.params?.data ? storeConfigService.getStoreConfigArray(commandAxios?.params?.data) : null;
+        const params = commandAxios.params.params ? storeConfigService.getStoreConfigArray(commandAxios.params.params) : null;
+        const headers = commandAxios.params.headers ? storeConfigService.getStoreConfigArray(commandAxios.params.headers) : null;
+        const config = { headers, params };
+        const result = await axiosService.runAxios(url, type, data, config);
+        loggerService.info("Запрос по http выполнен", { config: { name: command.name }, result, params: { url, type, data, config } });
+        return result;
+    }
+
     public async runConfig(commandList: Command[], body?: ConstuctorBody, isRecursion = false) {
         if (!isRecursion) {
             loggerService.info("Сохранение входящих данных", { data: body });
@@ -258,7 +272,8 @@ class ConstuctorService {
         [CommandAction.WEB_OPEN]: this.webOpen,
         [CommandAction.WEB_ELEMENT_CLICK]: this.webElementClick,
         [CommandAction.WEB_ELEMENT_INNER_HTML]: this.webGetInnerHtml,
-        [CommandAction.GET_TEXT_CONTENT]: this.getTextContent
+        [CommandAction.GET_TEXT_CONTENT]: this.getTextContent,
+        [CommandAction.AXIOS_HTTP]: this.axiosHttp
     }
 }
 
